@@ -4,7 +4,7 @@ import marker from "../../assets/marker.svg";
 import './Map.scss'
 import 'leaflet/dist/leaflet.css';
 import L, { LatLng } from 'leaflet';
-import React from 'react';
+import MarkerClusterGroup from 'react-leaflet-cluster'
 
 function LocationMarkers() {
   const customIcon = new L.Icon({
@@ -17,7 +17,7 @@ function LocationMarkers() {
     fetch('https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/list-all-points')
       .then((res) => res.json())
       .then((res) => {
-        if(res.STATUS === 'SUCCESS') {
+        if (res.STATUS === 'SUCCESS') {
           setMarkers(res.DATA.map((el: any) => ({
             id: el.idx,
             pos: new LatLng(el.lat, el.long),
@@ -31,13 +31,15 @@ function LocationMarkers() {
   }, []);
 
   return (
-    <React.Fragment>
+    <MarkerClusterGroup
+      chunkedLoading
+    >
       {markers.map((marker, i) => <Marker key={i} position={marker.pos} icon={customIcon}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>)}
-    </React.Fragment>
+    </MarkerClusterGroup>
   );
 }
 
