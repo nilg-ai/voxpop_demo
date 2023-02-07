@@ -1,56 +1,64 @@
 import { useEffect, useState } from 'react'
-import { TileLayer, Marker, MapContainer, Popup } from "react-leaflet";
+import { TileLayer, Marker, MapContainer } from "react-leaflet";
 import marker from "../../assets/marker.svg";
 import './Map.scss'
 import 'leaflet/dist/leaflet.css';
 import L, { LatLng } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { IMarker } from '../../interfaces/marker';
 
-function LocationMarkers() {
+function LocationMarkers(props: any) {
   const customIcon = new L.Icon({
     iconUrl: marker
   })
 
-  const [markers, setMarkers] = useState<any[]>([]);
+  const [markers, setMarkers] = useState<IMarker[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const getData = () => {
+    setLoading(true);
     fetch('https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/list-all-points')
       .then((res) => res.json())
       .then((res) => {
         if (res.STATUS === 'SUCCESS') {
           setMarkers(res.DATA.map((el: any) => ({
             id: el.idx,
-            pos: new LatLng(el.lat, el.long),
+            lat: el.lat,
+            long: el.long,
           })))
         }
+        setLoading(false);
       })
   }
 
   useEffect(() => {
-    getData();
-  }, []);
+    if(markers.length === 0 && !isLoading) {
+      getData();
+    }
+  }, [markers.length, isLoading]);
 
   return (
     <MarkerClusterGroup
       chunkedLoading
     >
-      {markers.map((marker, i) => <Marker key={i} position={marker.pos} icon={customIcon}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
+      {markers.map((marker, i) => <Marker key={i} position={new LatLng(marker.lat, marker.long)} icon={customIcon} eventHandlers={{
+        click: () => {
+          props.onSelectMarker(marker)
+        },
+      }}>
       </Marker>)}
     </MarkerClusterGroup>
   );
 }
 
-function Map() {
+function Map(props: any) {
   return (<>
     <MapContainer className='h-screen' center={[38.75, -9.15]} zoom={14}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationMarkers></LocationMarkers>
+      <LocationMarkers onSelectMarker={props.onSelectMarker}></LocationMarkers>
     </MapContainer>
   </>)
 }
