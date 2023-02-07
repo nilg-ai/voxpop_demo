@@ -16,8 +16,8 @@ function App() {
       <button onClick={showDetails}>Show details</button>
       <div className='flex'>
         {isShow ? <MarkerDetail></MarkerDetail> : <></>}
-        <Map></Map>
       </div>
+      <Map></Map>
     </>
   );
 }
