@@ -8,8 +8,8 @@ function App() {
   const [isShow, setIsShow] = React.useState(false);
   const [selectedMarker, setSelectedMarker] = useState<IMarker | undefined>(undefined);
 
-  function showDetails() {
-    setIsShow(!isShow);
+  function closeDetails() {
+    setIsShow(false);
   }
 
   function onSelectMarker(marker: IMarker) {
@@ -20,11 +20,10 @@ function App() {
   return (
     <>
       <Header></Header>
-      <button onClick={showDetails}> Show details</button>
       <div className="relative">
         <div className="absolute h-full sm:w-full md:w-1/3 lg:w-1/4 w-full z-20">
           {isShow ? (
-            <MarkerDetail selectedMarker={selectedMarker}></MarkerDetail>
+            <MarkerDetail selectedMarker={selectedMarker} onCloseDetails={closeDetails}></MarkerDetail>
           ) : (
             <></>
           )}
