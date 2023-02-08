@@ -1,9 +1,10 @@
 import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { IMarker } from "../../interfaces/marker";
+import { IMarker } from "../../interfaces/IMarker";
 import { FaThumbsUp, FaThumbsDown, FaRegMap } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsArrow90DegRight } from "react-icons/bs";
+import Feature from "../feature/Feature";
 
 
 const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMarker | undefined, onCloseDetails: () => void }) => {
@@ -43,6 +44,12 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
         long: marker.long,
         likes: marker.likes,
         dislikes: marker.dislikes,
+        directionsUrl: marker.GOOGLE_MAPS_URL,
+        features: marker.features.map((f: any) => ({
+          label: f.label,
+          prob: f.prob,
+          icon: f.icon
+        })),
         address
       })
     } else {
@@ -69,6 +76,12 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             long: marker.long,
             likes: marker.likes,
             dislikes: marker.dislikes,
+            directionsUrl: marker.GOOGLE_MAPS_URL,
+            features: marker.features.map((f: any) => ({
+              label: f.label,
+              prob: f.prob,
+              icon: f.icon
+            })),
             address: selectedMarkerDetail?.address
           });
           setVote(true);
@@ -82,7 +95,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
   }
 
   return (
-    <div className="flex flex-col bg-white h-full shadow-[0_0_12px_rgb(0,0,0,0.1)]">
+    <div className="flex flex-col bg-white h-full shadow-[0_0_12px_rgb(0,0,0,0.1)] overflow-auto">
       {isLoading ?
         <div className="self-center mt-3">
           <Spinner
@@ -103,17 +116,23 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
           <hr className="my-3" />
           <div className="flex mt-3 gap-10 justify-center">
             <div className="flex flex-col items-center">
-              <Button onClick={() => { }} className="rounded-full !h-14 w-14 !bg-blue-700 "><BsArrow90DegRight className="text-2xl font-semibold" /></Button>
+              <a href={selectedMarkerDetail?.directionsUrl} target="_blank" rel="noreferrer">
+                <Button onClick={() => { }} className="rounded-full !h-14 w-14 !bg-blue-700 ">
+                  <BsArrow90DegRight className="text-2xl font-semibold" />
+                </Button>
+              </a>
               <div className="mt-1 text-xs font-semibold">Directions</div>
             </div>
             <div className="flex flex-col items-center">
-              <Button onClick={() => { }} className="rounded-full !h-14 w-14 !bg-white border-slate-500"><FaRegMap className="text-2xl font-semibold text-blue-700" /></Button>
+              <Button onClick={() => { }} className="rounded-full !h-14 w-14 !bg-white border-slate-500">
+                <FaRegMap className="text-2xl font-semibold text-blue-700" />
+              </Button>
               <div className="mt-1 text-xs font-semibold">View Region</div>
             </div>
           </div>
           <hr className="my-3" />
-          <div className="flex p-3">
-            icons
+          <div className="grid grid-cols-3 p-3">
+            {selectedMarkerDetail?.features?.map((f, i) => <Feature key={i} label={f.label} prob={f.prob} icon={f.icon} />)}
           </div>
           {alreadyVoted ? <div className="flex flex-col bg-blue-700 text-white items-center p-3 ">
             <div className="font-bold text-2xl text-center">Thank you for your vote</div></div> : isLikeLoading ? <div className="self-center mt-3">

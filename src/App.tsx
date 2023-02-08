@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/header/Header';
 import Map from './components/map/Map';
 import MarkerDetail from './components/marker-detail/MarkerDetail';
-import { IMarker } from './interfaces/marker';
+import { IMarker } from './interfaces/IMarker';
 
 function App() {
   const [isShow, setIsShow] = React.useState(false);
