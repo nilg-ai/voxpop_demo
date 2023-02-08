@@ -19,7 +19,7 @@ function App() {
   }
 
   useEffect(() => {
-    if(!document.cookie) {
+    if (!document.cookie) {
       document.cookie = uuid();
     }
   });
@@ -28,13 +28,13 @@ function App() {
     <>
       <Header></Header>
       <div className="relative">
-        <div className="absolute h-full sm:w-full md:w-1/3 lg:w-1/4 w-full z-20">
-          {isShowingDetail ? (
+        {isShowingDetail ? (
+          <div className="absolute h-full sm:w-full md:w-1/3 lg:w-1/4 w-full z-20">
             <MarkerDetail selectedMarker={selectedMarker} onCloseDetails={closeDetails}></MarkerDetail>
-          ) : (
-            <></>
-          )}
-        </div>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="relative z-10">
           <Map onSelectMarker={onSelectMarker}></Map>
         </div>
