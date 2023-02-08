@@ -104,7 +104,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
         </div> :
         <>
           <div className="absolute top-0 right-0">
-            <Button className="bg-transparent hover:bg-transparent active:bg-transparent focus:ring-transparent text-black" onClick={onCloseDetails}>
+            <Button className="!bg-transparent !hover:bg-transparent !active:bg-transparent focus:!ring-0 !focus:ring-transparent !text-black" onClick={onCloseDetails}>
               <AiOutlineClose />
             </Button>
           </div>
@@ -117,14 +117,14 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
           <div className="flex mt-3 gap-10 justify-center">
             <div className="flex flex-col items-center">
               <a href={selectedMarkerDetail?.directionsUrl} target="_blank" rel="noreferrer">
-                <Button onClick={() => { }} className="rounded-full !h-14 w-14 !bg-blue-700 ">
+                <Button onClick={() => { }} className="!rounded-full !h-14 w-14 !bg-blue-700 ">
                   <BsArrow90DegRight className="text-2xl font-semibold" />
                 </Button>
               </a>
               <div className="mt-1 text-xs font-semibold">Directions</div>
             </div>
             <div className="flex flex-col items-center">
-              <Button onClick={() => { }} className="rounded-full !h-14 w-14 !bg-white border-slate-500">
+              <Button onClick={() => { }} className="!rounded-full !h-14 w-14 !bg-white !border-slate-500/25">
                 <FaRegMap className="text-2xl font-semibold text-blue-700" />
               </Button>
               <div className="mt-1 text-xs font-semibold">View Region</div>
@@ -143,11 +143,11 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             <div className="font-bold text-2xl text-center">Do you agree with the classification?</div>
             <div className="flex mt-3 gap-3">
               <div className="text-center">
-                <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="rounded-full !h-20 w-20 !bg-white "><FaThumbsUp className="text-3xl text-green-500" /></Button>
+                <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsUp className="text-3xl text-green-500" /></Button>
                 <div className="text-base mt-1">Yes</div>
               </div>
               <div className="text-center">
-                <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="rounded-full !h-20 w-20 !bg-white "><FaThumbsDown className="text-3xl text-red-500" /></Button>
+                <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsDown className="text-3xl text-red-500" /></Button>
                 <div className="text-base mt-1">No</div>
               </div>
             </div>
