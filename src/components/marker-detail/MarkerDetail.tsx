@@ -61,9 +61,10 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
   const onAction = (lat?: number, long?: number, like: boolean = true) => {
     setLikeLoading(true);
     fetch(`https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/point-feedback?lat=${lat}&longt=${long}&is_like=${like}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        "Authorization": "Bearer d7IYY9RbF"
       },
       body: JSON.stringify({}),
     })
