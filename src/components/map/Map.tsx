@@ -14,10 +14,16 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
   })
 
   const [markers, setMarkers] = useState<IMarker[]>([]);
+  const [isError, setError] = useState<boolean>(false);
 
   const getData = () => {
     setLoading(true);
-    fetch('https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/list-all-points')
+    fetch('https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/list-all-points', {
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer d7IYY9RbF"
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         if (res.STATUS === 'SUCCESS') {
@@ -26,13 +32,20 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
             lat: el.lat,
             long: el.long,
           })))
+        } else {
+          setError(true);
         }
         setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(true);
+        console.error(err);
       })
   }
 
   useEffect(() => {
-    if (markers.length === 0 && !isLoading) {
+    if (markers.length === 0 && !isLoading && !isError) {
       getData();
     }
   });

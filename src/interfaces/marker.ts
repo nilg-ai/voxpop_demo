@@ -3,4 +3,5 @@ export interface IMarker {
   long: number;
   likes?: number;
   dislikes?: number;
+  address?: string;
 }
