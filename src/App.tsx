@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+import CookieConsent from "react-cookie-consent";
 import Header from './components/header/Header';
 import Map from './components/map/Map';
 import MarkerDetail from './components/marker-detail/MarkerDetail';
 import { IMarker } from './interfaces/IMarker';
-import { v4 as uuid } from 'uuid';
 
 function App() {
   const [isShowingDetail, showDetail] = React.useState(false);
@@ -17,12 +18,6 @@ function App() {
     showDetail(true);
     setSelectedMarker(marker);
   }
-
-  useEffect(() => {
-    if (!document.cookie) {
-      document.cookie = uuid();
-    }
-  });
 
   return (
     <>
@@ -39,6 +34,14 @@ function App() {
           <Map onSelectMarker={onSelectMarker}></Map>
         </div>
       </div>
+      <CookieConsent
+        location="bottom"
+        buttonText="Ok"
+        cookieName="userId"
+        cookieValue={uuid()}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </>
   );
 }
