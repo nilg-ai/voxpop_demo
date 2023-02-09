@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
-import { TileLayer, Marker, MapContainer } from "react-leaflet";
-import marker from "../../assets/marker.svg";
+import { TileLayer, Marker, MapContainer, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import L, { LatLng } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { Button, Spinner } from 'flowbite-react';
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { BsArrow90DegRight } from "react-icons/bs";
+
+import marker from "../../assets/marker.svg";
 import { IMarker } from '../../interfaces/IMarker';
-import { Spinner } from 'flowbite-react';
 import './Map.scss';
 
 function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMarker: (marker: IMarker) => void, setLoading: (state: boolean) => void, isLoading: boolean }) {
@@ -56,7 +59,11 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
             id: el.idx,
             lat: el.lat,
             long: el.long,
-            color: el.point_color_code
+            color: el.point_color_code,
+            likes: el.likes,
+            dislikes: el.dislikes,
+            address: el.img_name,
+            directionsUrl: el.GOOGLE_MAPS_URL
           })))
         } else {
           setError(true);
@@ -81,11 +88,28 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
       chunkedLoading
     >
       {markers.map((marker, i) => <Marker key={i} position={new LatLng(marker.lat, marker.long)} icon={marker.lat === selectedMarker?.lat && marker.long === selectedMarker.long ? selectedIcon : icon(marker.color ?? '#FFFFFF')} eventHandlers={{
-        click: () => {
+        click: (event) => {
           setSelectedMarker(marker);
           onSelectMarker(marker);
+          event.target.closePopup();
         },
+        mouseover: (event) => { if (marker.lat !== selectedMarker?.lat || marker.long !== selectedMarker.long) { event.target.openPopup() } },
       }}>
+        <Popup>
+          <div className="flex flex-col">
+            <div className='flex justify-content items-center'>
+              <div className='whitespace-normal w-4/5'>{marker.address}</div>
+              <a className='w-1/5' href={marker.directionsUrl} target="_blank" rel="noreferrer">
+                <Button onClick={() => { }} className="!rounded-full !h-8 w-8 !bg-blue-700">
+                  <BsArrow90DegRight className="text-sm font-semibold" />
+                </Button>
+              </a></div>
+            <div className="flex text-slate-300 items-center mt-2">
+              <FaThumbsUp /> <span className="ml-1">{marker.likes}</span>
+              <FaThumbsDown className="ml-5" /> <span className="ml-1">{marker.dislikes}</span>
+            </div>
+          </div>
+        </Popup>
       </Marker>)}
     </MarkerClusterGroup>
   );
