@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/voxpop_demo/static/css/main.5c38b63d.css",
+    "main.css": "/voxpop_demo/static/css/main.9e02d8c3.css",
     "main.js": "/voxpop_demo/static/js/main.2a510553.js",
     "static/js/496.5735fe4e.chunk.js": "/voxpop_demo/static/js/496.5735fe4e.chunk.js",
     "index.html": "/voxpop_demo/index.html",
     "static/media/marker.svg": "/voxpop_demo/static/media/marker.c8e02210492ebae708d278295f2c03b9.svg",
-    "main.5c38b63d.css.map": "/voxpop_demo/static/css/main.5c38b63d.css.map",
+    "main.9e02d8c3.css.map": "/voxpop_demo/static/css/main.9e02d8c3.css.map",
     "main.2a510553.js.map": "/voxpop_demo/static/js/main.2a510553.js.map",
     "496.5735fe4e.chunk.js.map": "/voxpop_demo/static/js/496.5735fe4e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c38b63d.css",
+    "static/css/main.9e02d8c3.css",
     "static/js/main.2a510553.js"
   ]
 }
