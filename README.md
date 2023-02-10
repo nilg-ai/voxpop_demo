@@ -9,6 +9,8 @@ To run the project locally you simple should run
 and then
 `npm start`
 
+## To deploy the project
+`npm run deploy -- -m "Deploy React app to GitHub Pages"`
 
 ## Available Scripts
 
