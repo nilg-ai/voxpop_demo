@@ -136,24 +136,28 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             {selectedMarkerDetail?.features?.map((f, i) => <Feature key={i} label={f.label} prob={f.prob} icon={f.icon} />)}
           </div>
           {alreadyVoted ?
-            <div className="flex flex-col bg-blue-700 text-white items-center p-3 h-full justify-center">
-              <div className="font-bold text-2xl text-center">Thank you for your vote</div></div> : isLikeLoading ? <div className="self-center mt-3">
+            <div className="flex flex-col bg-blue-700 text-white items-center p-3 mt-auto justify-center">
+              <div className="font-bold text-2xl text-center">Thank you for your vote</div>
+            </div> :
+            isLikeLoading ?
+              <div className="self-center mt-auto p-3">
                 <Spinner
                   size="xl"
                 />
-              </div> : <div className="flex flex-col bg-blue-700 text-white items-center p-3 h-full justify-center">
-              <div className="font-bold text-2xl text-center">Do you agree with the classification?</div>
-              <div className="flex mt-3 gap-3">
-                <div className="text-center">
-                  <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsUp className="text-3xl text-green-500" /></Button>
-                  <div className="text-base mt-1">Yes</div>
+              </div> :
+              <div className="flex flex-col bg-blue-700 text-white items-center p-3 mt-auto justify-center mt-auto">
+                <div className="font-bold text-2xl text-center">Do you agree with the classification?</div>
+                <div className="flex mt-3 gap-3">
+                  <div className="text-center">
+                    <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsUp className="text-3xl text-green-500" /></Button>
+                    <div className="text-base mt-1">Yes</div>
+                  </div>
+                  <div className="text-center">
+                    <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsDown className="text-3xl text-red-500" /></Button>
+                    <div className="text-base mt-1">No</div>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsDown className="text-3xl text-red-500" /></Button>
-                  <div className="text-base mt-1">No</div>
-                </div>
-              </div>
-            </div>}
+              </div>}
         </>}
     </div>
   );
