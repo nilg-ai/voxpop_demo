@@ -149,11 +149,15 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
                 <div className="font-bold text-2xl text-center">Do you agree with the classification?</div>
                 <div className="flex mt-3 gap-3">
                   <div className="text-center">
-                    <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsUp className="text-3xl text-green-500" /></Button>
+                    <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="!rounded-full !h-20 w-20 !bg-white ">
+                      <FaThumbsUp className="text-3xl text-green-500" />
+                    </Button>
                     <div className="text-base mt-1">Yes</div>
                   </div>
                   <div className="text-center">
-                    <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white "><FaThumbsDown className="text-3xl text-red-500" /></Button>
+                    <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white ">
+                      <FaThumbsDown className="text-3xl text-red-500" />
+                      </Button>
                     <div className="text-base mt-1">No</div>
                   </div>
                 </div>

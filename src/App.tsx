@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
-import CookieConsent from "react-cookie-consent";
+import CookieBanner from './components/cookie-banner/CookieBanner';
 import Header from './components/header/Header';
 import Map from './components/map/Map';
 import MarkerDetail from './components/marker-detail/MarkerDetail';
@@ -34,14 +33,7 @@ function App() {
           <Map onSelectMarker={onSelectMarker}></Map>
         </div>
       </div>
-      <CookieConsent
-        location="bottom"
-        buttonText="Ok"
-        cookieName="userId"
-        cookieValue={uuid()}
-      >
-        This website uses cookies to enhance the user experience.
-      </CookieConsent>
+      <CookieBanner />
     </>
   );
 }
