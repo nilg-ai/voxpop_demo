@@ -1,4 +1,4 @@
-import { Button, Spinner } from "flowbite-react";
+import { Button, Carousel, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { IMarker } from "../../interfaces/IMarker";
 import { FaThumbsUp, FaThumbsDown, FaRegMap } from "react-icons/fa";
@@ -109,6 +109,20 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
               <AiOutlineClose />
             </Button>
           </div>
+          <Carousel slide={false} indicators={false}>
+            <img
+              src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
+              alt="..."
+            />
+            <img
+              src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
+              alt="..."
+            />
+            <img
+              src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
+              alt="..."
+            />
+          </Carousel>
           <div className="mt-5 p-3 font-medium text-base">{selectedMarkerDetail?.address}</div>
           <div className="flex p-3 text-slate-300 items-center">
             <FaThumbsUp /> <span className="ml-1">{selectedMarkerDetail?.likes}</span>
@@ -117,17 +131,17 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
           <hr className="my-3" />
           <div className="flex mt-3 gap-10 justify-center">
             <div className="flex flex-col items-center">
-              <a href={selectedMarkerDetail?.directionsUrl} target="_blank" rel="noreferrer">
-                <Button onClick={() => { }} className="!rounded-full !h-14 w-14 !bg-blue-700 ">
-                  <BsArrow90DegRight className="text-2xl font-semibold" />
-                </Button>
-              </a>
+              <Button className="!rounded-full !h-14 w-14 !bg-blue-700 ">
+                <BsArrow90DegRight className="text-2xl font-semibold" />
+              </Button>
               <div className="mt-1 text-xs font-semibold">Directions</div>
             </div>
             <div className="flex flex-col items-center">
-              <Button onClick={() => { }} className="!rounded-full !h-14 w-14 !bg-white !border-slate-500/25">
-                <FaRegMap className="text-2xl font-semibold text-blue-700" />
-              </Button>
+              <a href={selectedMarkerDetail?.directionsUrl} target="_blank" rel="noreferrer">
+                <Button className="!rounded-full !h-14 w-14 !bg-white !border-slate-500/25">
+                  <FaRegMap className="text-2xl font-semibold text-blue-700" />
+                </Button>
+              </a>
               <div className="mt-1 text-xs font-semibold">View Region</div>
             </div>
           </div>
@@ -157,7 +171,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
                   <div className="text-center">
                     <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white ">
                       <FaThumbsDown className="text-3xl text-red-500" />
-                      </Button>
+                    </Button>
                     <div className="text-base mt-1">No</div>
                   </div>
                 </div>

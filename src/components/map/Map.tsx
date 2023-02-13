@@ -6,6 +6,7 @@ import MarkerClusterGroup from 'react-leaflet-cluster'
 import { Button, Spinner } from 'flowbite-react';
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { BsArrow90DegRight } from "react-icons/bs";
+import { FaRegMap } from "react-icons/fa";
 
 import marker from "../../assets/marker.svg";
 import { IMarker } from '../../interfaces/IMarker';
@@ -98,12 +99,18 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
         <Popup>
           <div className="flex flex-col">
             <div className='flex justify-content items-center'>
-              <div className='whitespace-normal w-4/5'>{marker.address}</div>
-              <a className='w-1/5' href={marker.directionsUrl} target="_blank" rel="noreferrer">
+              <div className='whitespace-normal w-3/5'>{marker.address}</div>
+              <div className='flex w-2/5 gap-1 justify-end'>
                 <Button onClick={() => { }} className="!rounded-full !h-8 w-8 !bg-blue-700">
                   <BsArrow90DegRight className="text-sm font-semibold" />
                 </Button>
-              </a></div>
+                <a href={marker.directionsUrl} target="_blank" rel="noreferrer">
+                  <Button className="!rounded-full !h-8 w-8 !bg-white !border-slate-500/25">
+                    <FaRegMap className="text-sm font-semibold text-blue-700" />
+                  </Button>
+                </a>
+              </div>
+            </div>
             <div className="flex text-slate-300 items-center mt-2">
               <FaThumbsUp /> <span className="ml-1">{marker.likes}</span>
               <FaThumbsDown className="ml-5" /> <span className="ml-1">{marker.dislikes}</span>
