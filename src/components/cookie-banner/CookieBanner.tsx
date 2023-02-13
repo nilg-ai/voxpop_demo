@@ -1,5 +1,5 @@
 import { Button, Modal } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuid } from 'uuid';
 
 function CookieModal({ show, onDismiss, onAccept }: { show: boolean, onDismiss: (state: boolean) => void, onAccept: () => void }) {
@@ -37,11 +37,6 @@ function CookieBanner() {
     document.cookie = `userId=${uuid()}`;
     setCookie(true);
   }
-
-  useEffect(() => {
-    console.log("🚀  file: CookieBanner.tsx:42  acceptedCookie", acceptedCookie);
-    console.log("🚀  file: CookieBanner.tsx:43  document.cookie", document.cookie)
-  });
 
   return (
     <> 
