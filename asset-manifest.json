@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/voxpop_demo/static/css/main.61c2e102.css",
-    "main.js": "/voxpop_demo/static/js/main.89552aa2.js",
+    "main.css": "/voxpop_demo/static/css/main.1b231db2.css",
+    "main.js": "/voxpop_demo/static/js/main.e33434a3.js",
     "static/js/496.5735fe4e.chunk.js": "/voxpop_demo/static/js/496.5735fe4e.chunk.js",
     "index.html": "/voxpop_demo/index.html",
     "static/media/marker.svg": "/voxpop_demo/static/media/marker.c8e02210492ebae708d278295f2c03b9.svg",
-    "main.61c2e102.css.map": "/voxpop_demo/static/css/main.61c2e102.css.map",
-    "main.89552aa2.js.map": "/voxpop_demo/static/js/main.89552aa2.js.map",
+    "main.1b231db2.css.map": "/voxpop_demo/static/css/main.1b231db2.css.map",
+    "main.e33434a3.js.map": "/voxpop_demo/static/js/main.e33434a3.js.map",
     "496.5735fe4e.chunk.js.map": "/voxpop_demo/static/js/496.5735fe4e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61c2e102.css",
-    "static/js/main.89552aa2.js"
+    "static/css/main.1b231db2.css",
+    "static/js/main.e33434a3.js"
   ]
 }
