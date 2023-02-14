@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { GoogleReCaptchaProvider, GoogleReCaptcha } from 'react-google-recaptcha-v3';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <GoogleReCaptchaProvider reCaptchaKey="6Lc-dn8kAAAAAOotjI9flVy3gSivuHP2ZjbXwksZ">
+      <App />
+      <GoogleReCaptcha
+        onVerify={token => {
+          console.log("🚀  file: ReCaptcha.tsx:20  token", token)
+        }}
+      />
+    </GoogleReCaptchaProvider>
   </React.StrictMode>
 );
 
