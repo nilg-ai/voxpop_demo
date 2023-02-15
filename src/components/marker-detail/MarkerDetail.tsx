@@ -5,7 +5,6 @@ import { FaThumbsUp, FaThumbsDown, FaRegMap } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsArrow90DegRight } from "react-icons/bs";
 import Feature from "../feature/Feature";
-import "./MarkerDetail.scss";
 
 
 const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMarker | undefined, onCloseDetails: () => void }) => {
@@ -105,12 +104,10 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
           />
         </div> :
         <>
-          <div className="absolute top-4 -right-10 dismiss-button-wrapper">
-            <div className="dismiss-button bg-white">
-              <Button className="!bg-transparent !hover:bg-transparent !active:bg-transparent focus:!ring-0 !focus:ring-transparent !text-black" onClick={onCloseDetails}>
-                <AiOutlineClose />
-              </Button>
-            </div>
+          <div className="absolute top-0 right-0">
+            <Button className="!bg-transparent !hover:bg-transparent !active:bg-transparent focus:!ring-0 !focus:ring-transparent !text-black" onClick={onCloseDetails}>
+              <AiOutlineClose />
+            </Button>
           </div>
           <div className="mt-5 p-3 font-medium text-base">{selectedMarkerDetail?.address}</div>
           <div className="flex p-3 text-slate-300 items-center">
