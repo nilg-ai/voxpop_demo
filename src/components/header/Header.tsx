@@ -9,11 +9,17 @@ function Header() {
       rounded={true}
     >
       <Navbar.Brand>
-        <img
-          src="https://nilg.ai/wp-content/uploads/2022/03/logo.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite Logo"
-        />
+        <a href="https://nilg.ai/" className="flex flex-col items-start">
+          <div className="font-black text-xl text-gray-900">SafeJourney</div>
+          <div className="font-semibold text-xs text-gray-900 flex">by
+            <img
+              src="https://nilg.ai/wp-content/uploads/2022/03/logo.svg"
+              alt="Nilg.ai"
+              className="h-4 ml-3"
+            />
+          </div>
+        </a>
+
       </Navbar.Brand>
       <div className="flex md:order-2 ml-auto">
         <Button
