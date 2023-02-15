@@ -13,7 +13,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isLikeLoading, setLikeLoading] = useState<boolean>(false);
   const [alreadyVoted, setVote] = useState<boolean>(false);
-  const [isError, setError] = useState<boolean>(false);
+  const [, setError] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedMarker) {
