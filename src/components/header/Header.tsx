@@ -8,7 +8,6 @@ function Header() {
       fluid={true}
       rounded={true}
     >
-      <Navbar.Brand>
         <a href="https://nilg.ai/" className="flex flex-col items-start">
           <div className="font-black text-xl text-gray-900">SafeJourney</div>
           <div className="font-semibold text-xs text-gray-900 flex">by
@@ -19,8 +18,6 @@ function Header() {
             />
           </div>
         </a>
-
-      </Navbar.Brand>
       <div className="flex md:order-2 ml-auto">
         <Button
           color="white"
