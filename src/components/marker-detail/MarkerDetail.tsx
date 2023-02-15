@@ -5,6 +5,7 @@ import { FaThumbsUp, FaThumbsDown, FaRegMap } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsArrow90DegRight } from "react-icons/bs";
 import Feature from "../feature/Feature";
+import getCookie from "../../utils/get-cookie";
 
 
 const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMarker | undefined, onCloseDetails: () => void }) => {
@@ -12,7 +13,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isLikeLoading, setLikeLoading] = useState<boolean>(false);
   const [alreadyVoted, setVote] = useState<boolean>(false);
-  const [, setError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>();
 
   useEffect(() => {
     if (selectedMarker) {
@@ -52,15 +53,14 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
         })),
         address
       })
-    } else {
-      setError(true);
-    }
+    } 
     setLoading(false);
   }
 
   const onAction = (lat?: number, long?: number, like: boolean = true) => {
     setLikeLoading(true);
-    fetch(`${process.env.REACT_APP_API_URL}/point-feedback?lat=${lat}&longt=${long}&is_like=${like}`, {
+    const cookie: string | undefined = getCookie('userId')
+    fetch(`${process.env.REACT_APP_API_URL}/point-feedback?lat=${lat}&longt=${long}&is_like=${like}&cookie=${cookie ? cookie : ''}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -85,8 +85,9 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             })),
             address: selectedMarkerDetail?.address
           });
-          setVote(true);
         }
+        setMessage(res.MESSAGE);
+        setVote(true);
         setLikeLoading(false);
       })
       .catch((error) => {
@@ -137,7 +138,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
           </div>
           {alreadyVoted ?
             <div className="flex flex-col bg-blue-700 text-white items-center p-3 mt-auto justify-center">
-              <div className="font-bold text-2xl text-center">Thank you for your vote</div>
+              <div className="font-bold text-2xl text-center">{message}</div>
             </div> :
             isLikeLoading ?
               <div className="self-center mt-auto p-3">

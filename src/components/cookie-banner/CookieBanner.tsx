@@ -48,7 +48,7 @@ function CookieBanner() {
     <> 
     
     {!acceptedCookie  ? <>
-      <div className="flex justify-center items-center w-screen fixed bottom-0 left-0 z-50 bg-white">
+      <div className="flex justify-center items-center w-screen fixed bottom-0 left-0 z-40 bg-white">
         <div className="w-9/12 p-3">
           We use cookies on our website to give you the most relevant experience by remembering your preferences and repeat visits. By clicking “Accept All”, you consent to the use of ALL the cookies. However, you may visit "Cookie Settings" to provide a controlled consent
         </div>

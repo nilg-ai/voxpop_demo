@@ -23,7 +23,7 @@ function App() {
       <Header></Header>
       <div className="relative">
         {isShowingDetail ? (
-          <div className="absolute h-full sm:w-full md:w-1/3 lg:w-1/4 w-full z-20">
+          <div className="absolute h-full sm:w-full md:w-1/3 lg:w-1/4 w-full z-50">
             <MarkerDetail selectedMarker={selectedMarker} onCloseDetails={closeDetails}></MarkerDetail>
           </div>
         ) : (
