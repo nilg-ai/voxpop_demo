@@ -44,13 +44,12 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
     html: `<div style="${selectedMarkerHtmlStyles}" />`
   })
 
-
   const getData = () => {
     setLoading(true);
-    fetch('https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/list-all-points', {
+    fetch(`${process.env.REACT_APP_API_URL}/list-all-points`, {
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer d7IYY9RbF"
+        'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`
       },
     })
       .then((res) => res.json())
