@@ -1,11 +1,11 @@
-import { Button, Carousel, Spinner } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { IMarker } from "../../interfaces/IMarker";
 import { FaThumbsUp, FaThumbsDown, FaRegMap } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsArrow90DegRight } from "react-icons/bs";
 import Feature from "../feature/Feature";
-import './MarkerDetail.scss';
+import "./MarkerDetail.scss";
 
 
 const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMarker | undefined, onCloseDetails: () => void }) => {
@@ -25,10 +25,10 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
     setLoading(true);
     setVote(false);
     const [result1, result2] = await Promise.all([
-      fetch(`https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/get-point-metadata?lat=${lat}&longt=${long}`, {
+      fetch(`${process.env.REACT_APP_API_URL}/get-point-metadata?lat=${lat}&longt=${long}`, {
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": "Bearer d7IYY9RbF"
+          'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`
         },
       })
         .then((res) => res.json())
@@ -61,11 +61,11 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
 
   const onAction = (lat?: number, long?: number, like: boolean = true) => {
     setLikeLoading(true);
-    fetch(`https://iazscc3pr4.execute-api.us-east-1.amazonaws.com/prod/point-feedback?lat=${lat}&longt=${long}&is_like=${like}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/point-feedback?lat=${lat}&longt=${long}&is_like=${like}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": "Bearer d7IYY9RbF"
+        'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`
       },
       body: JSON.stringify({}),
     })
@@ -79,7 +79,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             likes: marker.likes,
             dislikes: marker.dislikes,
             directionsUrl: marker.GOOGLE_MAPS_URL,
-            features: marker.features.map((f: any) => ({
+            features: selectedMarkerDetail?.features?.map((f: any) => ({
               label: f.label,
               prob: f.prob,
               icon: f.icon
@@ -112,20 +112,6 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
               </Button>
             </div>
           </div>
-          <Carousel slide={false} indicators={false}>
-            <img
-              src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
-              alt="..."
-            />
-            <img
-              src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-              alt="..."
-            />
-            <img
-              src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
-              alt="..."
-            />
-          </Carousel>
           <div className="mt-5 p-3 font-medium text-base">{selectedMarkerDetail?.address}</div>
           <div className="flex p-3 text-slate-300 items-center">
             <FaThumbsUp /> <span className="ml-1">{selectedMarkerDetail?.likes}</span>
