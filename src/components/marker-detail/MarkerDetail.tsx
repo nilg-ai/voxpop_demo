@@ -118,7 +118,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
           <hr className="my-3" />
           <div className="flex mt-3 gap-10 justify-center">
             <div className="flex flex-col items-center">
-              <Button className="!rounded-full !h-14 w-14 !bg-blue-700 ">
+              <Button className="!rounded-full !h-14 w-14 !bg-nilg-blue">
                 <BsArrow90DegRight className="text-2xl font-semibold" />
               </Button>
               <div className="mt-1 text-xs font-semibold">Directions</div>
@@ -126,7 +126,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             <div className="flex flex-col items-center">
               <a href={selectedMarkerDetail?.directionsUrl} target="_blank" rel="noreferrer">
                 <Button className="!rounded-full !h-14 w-14 !bg-white !border-slate-500/25">
-                  <FaRegMap className="text-2xl font-semibold text-blue-700" />
+                  <FaRegMap className="text-2xl font-semibold !text-nilg-blue" />
                 </Button>
               </a>
               <div className="mt-1 text-xs font-semibold">View Region</div>
@@ -137,7 +137,7 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
             {selectedMarkerDetail?.features?.map((f, i) => <Feature key={i} label={f.label} prob={f.prob} icon={f.icon} />)}
           </div>
           {alreadyVoted ?
-            <div className="flex flex-col bg-blue-700 text-white items-center p-3 mt-auto justify-center">
+            <div className="flex flex-col bg-nilg-blue text-white items-center p-3 mt-auto justify-center">
               <div className="font-bold text-2xl text-center">{message}</div>
             </div> :
             isLikeLoading ?
@@ -146,18 +146,18 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
                   size="xl"
                 />
               </div> :
-              <div className="flex flex-col bg-blue-700 text-white items-center p-3 mt-auto justify-center mt-auto">
+              <div className="flex flex-col bg-nilg-blue text-white items-center p-3 mt-auto justify-center mt-auto">
                 <div className="font-bold text-2xl text-center">Do you agree with the classification?</div>
                 <div className="flex mt-3 gap-3">
                   <div className="text-center">
                     <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long)} className="!rounded-full !h-20 w-20 !bg-white ">
-                      <FaThumbsUp className="text-3xl text-green-500" />
+                      <FaThumbsUp className="text-3xl text-nilg-green" />
                     </Button>
                     <div className="text-base mt-1">Yes</div>
                   </div>
                   <div className="text-center">
                     <Button onClick={() => onAction(selectedMarkerDetail?.lat, selectedMarkerDetail?.long, false)} className="!rounded-full !h-20 w-20 !bg-white ">
-                      <FaThumbsDown className="text-3xl text-red-500" />
+                      <FaThumbsDown className="text-3xl text-nilg-orange" />
                     </Button>
                     <div className="text-base mt-1">No</div>
                   </div>

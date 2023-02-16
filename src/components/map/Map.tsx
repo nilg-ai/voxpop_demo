@@ -100,12 +100,12 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
             <div className='flex justify-content items-center'>
               <div className='whitespace-normal w-3/5'>{marker.address}</div>
               <div className='flex w-2/5 gap-1 justify-end'>
-                <Button onClick={() => { }} className="!rounded-full !h-8 w-8 !bg-blue-700">
+                <Button onClick={() => { }} className="!rounded-full !h-8 w-8 !bg-nilg-blue">
                   <BsArrow90DegRight className="text-sm font-semibold" />
                 </Button>
                 <a href={marker.directionsUrl} target="_blank" rel="noreferrer">
                   <Button className="!rounded-full !h-8 w-8 !bg-white !border-slate-500/25">
-                    <FaRegMap className="text-sm font-semibold text-blue-700" />
+                    <FaRegMap className="text-sm font-semibold text-nilg-blue" />
                   </Button>
                 </a>
               </div>

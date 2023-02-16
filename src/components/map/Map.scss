@@ -7,14 +7,9 @@
   background: none;
 }
 
-.marker-cluster-large div {
-  background-color: #eb412a;
-}
-
-.marker-cluster-medium div {
-  background-color: #f3ce4a;
-}
-
+.marker-cluster-large div,
+.marker-cluster-medium div,
 .marker-cluster-small div {
-  background-color: #49c549;
+  background-color: #353cdd;
+  color: white;
 }

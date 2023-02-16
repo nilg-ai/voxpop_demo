@@ -1,9 +1,9 @@
 function Feature({label, prob, icon}: {label: string, prob: number, icon: string}) {
 
   const getColorByProb = (prob: number) => {
-    if(prob > 0.66) return 'text-green-500'
-    if(prob > 0.33) return 'text-yellow-500'
-    return 'text-red-500';
+    if(prob > 0.66) return 'text-nilg-green'
+    if(prob > 0.33) return 'text-nilg-yellow'
+    return 'text-nilg-orange';
   }
 
   return (

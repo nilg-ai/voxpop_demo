@@ -18,9 +18,9 @@ function CookieModal({ show, onDismiss, onAccept }: { show: boolean, onDismiss: 
           </p>
           <p>Check our cookie policy, terms, and privacy policy</p>
           <ul>
-            <li><a className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="https://nilg.ai/terms-of-service/" target="_blank" rel="noreferrer">https://nilg.ai/terms-of-service/</a></li>
-            <li><a className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="https://nilg.ai/privacy-policy/" target="_blank" rel="noreferrer">https://nilg.ai/privacy-policy/</a></li>
-            <li><a className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="https://nilg.ai/cookie-policy/" target="_blank" rel="noreferrer">https://nilg.ai/cookie-policy/</a></li>
+            <li><a className="font-medium text-nilg-blue hover:underline" href="https://nilg.ai/terms-of-service/" target="_blank" rel="noreferrer">https://nilg.ai/terms-of-service/</a></li>
+            <li><a className="font-medium text-nilg-blue hover:underline" href="https://nilg.ai/privacy-policy/" target="_blank" rel="noreferrer">https://nilg.ai/privacy-policy/</a></li>
+            <li><a className="font-medium text-nilg-blue hover:underline" href="https://nilg.ai/cookie-policy/" target="_blank" rel="noreferrer">https://nilg.ai/cookie-policy/</a></li>
           </ul>
         </div>
       </Modal.Body>
