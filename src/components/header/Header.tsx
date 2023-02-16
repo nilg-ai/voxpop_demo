@@ -8,23 +8,25 @@ function Header() {
       fluid={true}
       rounded={true}
     >
-        <a href="https://nilg.ai/" className="flex flex-col items-start">
-          <div className="font-black text-xl text-gray-900">SafeJourney</div>
-          <div className="font-semibold text-xs text-gray-900 flex">by
-            <img
-              src="https://nilg.ai/wp-content/uploads/2022/03/logo.svg"
-              alt="Nilg.ai"
-              className="h-4 ml-3"
-            />
-          </div>
-        </a>
+      <div className="flex flex-col items-start">
+        <div className="font-black text-xl text-gray-900">SafeJourney</div>
+        <div className="font-semibold text-xs text-gray-900 flex">by
+          <img
+            src="https://nilg.ai/wp-content/uploads/2022/03/logo.svg"
+            alt="Nilg.ai"
+            className="h-4 ml-3"
+          />
+        </div>
+      </div>
       <div className="flex md:order-2 ml-auto">
-        <Button
-          color="white"
-          className="focus:ring-gray-200"
-        >
-          About
-        </Button>
+        <a href="https://nilg.ai/safejourney/" type="button" target="_blank" rel="noreferrer">
+          <Button
+            color="white"
+            className="focus:ring-gray-200"
+          >
+            About
+          </Button>
+        </a>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
