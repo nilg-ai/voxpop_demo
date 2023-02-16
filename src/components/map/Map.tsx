@@ -25,10 +25,10 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
     top: -0.2rem;
     position: relative;
     border-radius: 50%;`;
+
   const icon = (color: string) => L.divIcon({
     html: `<div style="${markerHtmlStyles(color)}" />`
   })
-
 
   const selectedMarkerHtmlStyles = `
     background-image: url(${marker});
@@ -97,7 +97,7 @@ function LocationMarkers({ onSelectMarker, setLoading, isLoading }: { onSelectMa
       }}>
         <Popup>
           <div className="flex flex-col">
-            <div className='flex justify-content items-center'>
+            <div className='flex justify-content items-center gap-2 min-w-[12rem]'>
               <div className='whitespace-normal w-3/5'>{marker.address}</div>
               <div className='flex w-2/5 gap-1 justify-end'>
                 <Button onClick={() => { }} className="!rounded-full !h-8 w-8 !bg-nilg-blue">
