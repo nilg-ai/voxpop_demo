@@ -24,37 +24,39 @@ const MarkerDetail = ({ selectedMarker, onCloseDetails }: { selectedMarker: IMar
   const getMarkerDetails = async (lat: number, long: number) => {
     setLoading(true);
     setVote(false);
-    const [result1, result2] = await Promise.all([
-      fetch(`${process.env.REACT_APP_API_URL}/get-point-metadata?lat=${lat}&longt=${long}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`
-        },
-      })
-        .then((res) => res.json())
-        .catch((err) => console.error(err)),
-      fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=json`)
-        .then((res) => res.json())
-        .catch((err) => console.error(err))]);
 
-    if (result1.STATUS === 'SUCCESS' && !result2.error) {
-      const marker = result1.DATA[0];
-      const address = result2.display_name;
-      setMarkerDetail({
-        lat: marker.lat,
-        long: marker.long,
-        likes: marker.likes,
-        dislikes: marker.dislikes,
-        directionsUrl: marker.GOOGLE_MAPS_URL,
-        features: marker.features.map((f: any) => ({
-          label: f.label,
-          prob: f.prob,
-          icon: f.icon
-        })),
-        address
+    fetch(`${process.env.REACT_APP_API_URL}/get-point-metadata?lat=${lat}&longt=${long}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+
+        if (res.STATUS === 'SUCCESS') {
+          const marker = res.DATA[0];
+          setMarkerDetail({
+            lat: marker.lat,
+            long: marker.long,
+            likes: marker.likes,
+            dislikes: marker.dislikes,
+            directionsUrl: marker.GOOGLE_MAPS_URL,
+            features: marker.features.map((f: any) => ({
+              label: f.label,
+              prob: f.prob,
+              icon: f.icon
+            })),
+            address: marker.address
+          })
+        }
+        setLoading(false);
       })
-    } 
-    setLoading(false);
+      .catch((err) => {
+        setLoading(false);
+        console.error(err)
+      })
+
   }
 
   const onAction = (lat?: number, long?: number, like: boolean = true) => {
