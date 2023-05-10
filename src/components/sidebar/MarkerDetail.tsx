@@ -9,10 +9,8 @@ import Spinner from '../Spinner'
 
 const MarkerDetail = ({
     selectedMarker,
-    onCloseDetails,
 }: {
     selectedMarker: IMarker | undefined
-    onCloseDetails: () => void
 }) => {
     const [selectedMarkerDetail, setMarkerDetail] = useState<
         IMarker | undefined
@@ -116,21 +114,13 @@ const MarkerDetail = ({
     }
 
     return (
-        <div className="flex h-full flex-col overflow-auto bg-white shadow-[0_0_12px_rgb(0,0,0,0.1)]">
+        <>
             {isLoading ? (
                 <div className="mt-3 self-center">
                     <Spinner />
                 </div>
             ) : (
                 <>
-                    <div className="absolute top-0 right-0">
-                        <button
-                            className="!hover:bg-transparent !active:bg-transparent !focus:ring-transparent !bg-transparent !text-black focus:!ring-0"
-                            onClick={onCloseDetails}
-                        >
-                            <AiOutlineClose />
-                        </button>
-                    </div>
                     <div className="mt-5 p-3 text-base font-medium">
                         {selectedMarkerDetail?.address}
                     </div>
@@ -230,7 +220,7 @@ const MarkerDetail = ({
                     )}
                 </>
             )}
-        </div>
+        </>
     )
 }
 

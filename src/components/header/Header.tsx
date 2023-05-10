@@ -2,7 +2,8 @@ import { useState } from 'react'
 import Input from './Input'
 import Brand from './Brand'
 import { Dialog } from '@headlessui/react'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars } from 'react-icons/fa'
+import { AiOutlineClose } from 'react-icons/ai'
 
 function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -56,7 +57,10 @@ function Header() {
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             <span className="sr-only">Close menu</span>
-                            <FaTimes className="h-6 w-6" aria-hidden="true" />
+                            <AiOutlineClose
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                            />
                         </button>
                     </div>
                     <div className="mt-6 flow-root">

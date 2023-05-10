@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { FaTimes } from 'react-icons/fa'
+import { AiOutlineClose } from 'react-icons/ai'
 import { v4 as uuid } from 'uuid'
 
 function CookieModal({
@@ -50,7 +50,7 @@ function CookieModal({
                                         onClick={() => onDismiss(false)}
                                     >
                                         <span className="sr-only">Close</span>
-                                        <FaTimes
+                                        <AiOutlineClose
                                             className="h-6 w-6"
                                             aria-hidden="true"
                                         />

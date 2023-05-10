@@ -1,6 +1,14 @@
-import { useEffect, useState } from 'react'
+import { createElement, useEffect, useRef, useState } from 'react'
+import ReactDOMServer from 'react-dom/server'
+
 import L, { LatLng, marker } from 'leaflet'
-import { TileLayer, Marker, MapContainer, Popup } from 'react-leaflet'
+import {
+    TileLayer,
+    Marker,
+    MapContainer,
+    Popup,
+    useMapEvents,
+} from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 
 import { FaThumbsUp, FaThumbsDown, FaRegMap } from 'react-icons/fa'
@@ -161,12 +169,53 @@ function LocationMarkers({
     )
 }
 
+function DirectionsPopup({
+    position,
+    setOrigin,
+    setDestination,
+}: {
+    position: LatLng
+    setOrigin: (origin: LatLng) => void
+    setDestination: (destination: LatLng) => void
+}) {
+    return (
+        <div className="flex flex-col">
+            <button onClick={() => setOrigin(position)}>
+                Directions from here
+            </button>
+
+            <button onClick={() => setDestination(position)}>
+                Directions to here
+            </button>
+        </div>
+    )
+}
+
 function Map({
     onSelectMarker,
+    setOrigin,
+    setDestination,
 }: {
     onSelectMarker: (marker: IMarker) => void
+    setOrigin: (origin: LatLng) => void
+    setDestination: (destination: LatLng) => void
 }) {
     const [isLoading, setLoading] = useState<boolean>(false)
+    const [showDirectionsPopup, setShowDirectionsPopup] = useState(false)
+    const [cursorPos, setCursorPos] = useState<LatLng | null>(null)
+
+    const MapEvents = () => {
+        useMapEvents({
+            contextmenu: (event) => {
+                setCursorPos(event.latlng)
+                setShowDirectionsPopup(true)
+            },
+            popupclose: () => {
+                setCursorPos(null)
+            },
+        })
+        return <></>
+    }
 
     return (
         <div className="relative">
@@ -191,6 +240,18 @@ function Map({
                     setLoading={setLoading}
                     isLoading={isLoading}
                 ></LocationMarkers>
+
+                <MapEvents />
+
+                {showDirectionsPopup && cursorPos && (
+                    <Popup position={cursorPos}>
+                        <DirectionsPopup
+                            position={cursorPos}
+                            setOrigin={setOrigin}
+                            setDestination={setDestination}
+                        />
+                    </Popup>
+                )}
             </MapContainer>
         </div>
     )
