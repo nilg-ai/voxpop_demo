@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IMarker } from '../../interfaces/IMarker'
 import { FaThumbsUp, FaThumbsDown, FaRegMap } from 'react-icons/fa'
-import { AiOutlineClose } from 'react-icons/ai'
 import { BsArrow90DegRight } from 'react-icons/bs'
 import Feature from '../feature/Feature'
 import getCookie from '../../utils/get-cookie'
