@@ -5,6 +5,7 @@ import Header from './components/header/Header'
 import Map from './components/map/Map'
 import Sidebar from './components/sidebar/Sidebar'
 import { LatLng } from 'leaflet'
+import { IRoute } from './interfaces/IRoute'
 
 function App() {
     const [isShowingSidebar, showSidebar] = useState(false)
@@ -13,8 +14,9 @@ function App() {
     )
     const [origin, setOrigin] = useState<LatLng | null>(null)
     const [destination, setDestination] = useState<LatLng | null>(null)
+    const [selectedRoute, setSelectedRoute] = useState<IRoute | null>(null)
 
-    function closeDetails() {
+    function onCloseDetails() {
         showSidebar(false)
     }
 
@@ -33,6 +35,10 @@ function App() {
         setDestination(origin)
     }
 
+    function onSelectedRoute(route: IRoute) {
+        setSelectedRoute(route)
+    }
+
     return (
         <>
             <Header></Header>
@@ -41,9 +47,10 @@ function App() {
                     <div className="absolute z-50 h-full w-full sm:w-full md:w-1/3 lg:w-1/4">
                         <Sidebar
                             selectedMarker={selectedMarker}
-                            onCloseDetails={closeDetails}
+                            closeDetails={onCloseDetails}
                             origin={origin}
                             destination={destination}
+                            selectRoute={onSelectedRoute}
                         />
                     </div>
                 ) : (
@@ -54,6 +61,7 @@ function App() {
                         onSelectMarker={onSelectMarker}
                         setOrigin={onSetOrigin}
                         setDestination={onSetDestination}
+                        selectedRoute={selectedRoute}
                     ></Map>
                 </div>
             </div>

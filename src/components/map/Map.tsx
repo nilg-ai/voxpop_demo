@@ -1,5 +1,4 @@
-import { createElement, useEffect, useRef, useState } from 'react'
-import ReactDOMServer from 'react-dom/server'
+import { useEffect, useState } from 'react'
 
 import L, { LatLng, marker } from 'leaflet'
 import {
@@ -8,6 +7,7 @@ import {
     MapContainer,
     Popup,
     useMapEvents,
+    Polyline,
 } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 
@@ -18,6 +18,7 @@ import { IMarker } from '../../interfaces/IMarker'
 import Spinner from '../Spinner'
 import './Map.scss'
 import 'leaflet/dist/leaflet.css'
+import { IRoute } from '../../interfaces/IRoute'
 
 function LocationMarkers({
     onSelectMarker,
@@ -195,10 +196,12 @@ function Map({
     onSelectMarker,
     setOrigin,
     setDestination,
+    selectedRoute,
 }: {
     onSelectMarker: (marker: IMarker) => void
     setOrigin: (origin: LatLng) => void
     setDestination: (destination: LatLng) => void
+    selectedRoute: IRoute | null
 }) {
     const [isLoading, setLoading] = useState<boolean>(false)
     const [showDirectionsPopup, setShowDirectionsPopup] = useState(false)
@@ -252,6 +255,20 @@ function Map({
                         />
                     </Popup>
                 )}
+
+                {selectedRoute &&
+                    selectedRoute.segments.map((point, i) => (
+                        <Polyline
+                            key={i}
+                            positions={[
+                                [point.origin[1], point.origin[0]],
+                                [point.destination[1], point.destination[0]],
+                            ]}
+                            color={'#353cdd'}
+                            weight={8}
+                            smoothFactor={1}
+                        />
+                    ))}
             </MapContainer>
         </div>
     )

@@ -15,16 +15,18 @@ const types = [
 function Directions({
     origin,
     destination,
+    selectRoute,
 }: {
     origin: LatLng | null
     destination: LatLng | null
+    selectRoute: (route: IRoute) => void
 }) {
     const [selected, setSelected] = useState<number>()
     const [routes, setRoutes] = useState<IRoute[]>([])
     const [selectedRoute, setSelectedRoute] = useState<IRoute>()
 
     useEffect(() => {
-        if (routes) {
+        if (routes.length === 0) {
             fetch(
                 `${process.env.REACT_APP_API_URL}/get-route?origin=Avenida de Roma, 76&destination=Av. Padre Manuel da Nóbrega 10-12&wheelchair_type=electrical`,
                 {
@@ -51,6 +53,7 @@ function Directions({
 
     function onRouteClick(route: IRoute) {
         setSelectedRoute(route)
+        selectRoute(route)
     }
 
     return (
