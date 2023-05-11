@@ -9,6 +9,7 @@ module.exports = {
                 'nilg-yellow': '#ffc700',
                 'nilg-orange': '#ff6900',
                 'nilg-gray': '#E6E6F2',
+                'nilg-dark-gray': '#8E8EA6',
                 'nilg-black': '#24272F',
             },
         },
