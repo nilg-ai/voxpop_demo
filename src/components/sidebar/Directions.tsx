@@ -1,34 +1,58 @@
 import { useEffect, useState } from 'react'
-import { LatLng } from 'leaflet'
 import { BsThreeDots } from 'react-icons/bs'
 import { FaDotCircle, FaFlagCheckered } from 'react-icons/fa'
 import { HiOutlineArrowsUpDown } from 'react-icons/hi2'
+import { debounce } from 'lodash-es'
+
 import { IRoute } from '../../interfaces/IRoute'
 import AvailableRoutes from './AvailableRoutes'
 import RouteDetails from './RouteDetails'
+import Spinner from '../Spinner'
 
 const types = [
-    { id: 1, name: 'Basic' },
-    { id: 2, name: 'Motor' },
+    { id: 1, name: 'Basic', type: 'electrical' },
+    { id: 2, name: 'Motor', type: 'electrical' },
 ]
 
 function Directions({
     origin,
     destination,
+    setDirectionRoutes,
     selectRoute,
 }: {
-    origin: LatLng | null
-    destination: LatLng | null
+    origin: string
+    destination: string
+    setDirectionRoutes: (routes: IRoute[]) => void
     selectRoute: (route: IRoute) => void
 }) {
-    const [selected, setSelected] = useState<number>()
+    const [selectedType, setSelectedType] = useState<string>(types[0].type)
     const [routes, setRoutes] = useState<IRoute[]>([])
     const [selectedRoute, setSelectedRoute] = useState<IRoute>()
+    const debounceOrigin = debounce((value) => setOriginValue(value), 2000)
+    const debounceDestination = debounce(
+        (value) => setDestinationValue(value),
+        2000
+    )
+
+    const [originValue, setOriginValue] = useState(origin)
+    const [destinationValue, setDestinationValue] = useState(destination)
+    const [isLoading, setLoading] = useState<boolean>(false)
+    const [routeNotFound, setRouteNotFound] = useState<boolean>(false)
 
     useEffect(() => {
-        if (routes.length === 0) {
+        setOriginValue(origin)
+    }, [origin])
+
+    useEffect(() => {
+        setDestinationValue(destination)
+    }, [destination])
+
+    useEffect(() => {
+        if (originValue && destinationValue && selectedType) {
+            setLoading(true)
+            setRouteNotFound(false)
             fetch(
-                `${process.env.REACT_APP_API_URL}/get-route?origin=Avenida de Roma, 76&destination=Av. Padre Manuel da Nóbrega 10-12&wheelchair_type=electrical`,
+                `${process.env.REACT_APP_API_URL}/get-route?origin=${originValue}&destination=${destinationValue}&wheelchair_type=${selectedType}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,13 +67,22 @@ function Directions({
                             res.DATA[0].best_route,
                             ...res.DATA[0].other_routes,
                         ])
+                        setDirectionRoutes([
+                            ...res.DATA[0].other_routes,
+                            res.DATA[0].best_route,
+                        ])
+                    } else {
+                        setRouteNotFound(true)
                     }
+                    setLoading(false)
                 })
                 .catch((err) => {
                     console.error(err)
+                    setRouteNotFound(true)
+                    setLoading(false)
                 })
         }
-    }, [routes])
+    }, [originValue, destinationValue, selectedType])
 
     function onRouteClick(route: IRoute) {
         setSelectedRoute(route)
@@ -73,19 +106,15 @@ function Directions({
                             <input
                                 className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
                                 type="text"
-                                defaultValue={
-                                    origin
-                                        ? `${origin?.lat}, ${origin?.lng}`
-                                        : ''
-                                }
+                                defaultValue={originValue}
+                                onChange={(e) => debounceOrigin(e.target.value)}
                             />
                             <input
                                 className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
                                 type="text"
-                                defaultValue={
-                                    destination
-                                        ? `${destination?.lat}, ${destination?.lng}`
-                                        : ''
+                                defaultValue={destinationValue}
+                                onChange={(e) =>
+                                    debounceDestination(e.target.value)
                                 }
                             />
                         </div>
@@ -104,11 +133,13 @@ function Directions({
                                 id="type"
                                 name="type"
                                 className="block w-full rounded-md border-0 py-1.5 text-nilg-black"
-                                defaultValue={types[0].id}
-                                onChange={(e) => setSelected(+e.target.value)}
+                                defaultValue={types[0].type}
+                                onChange={(e) =>
+                                    setSelectedType(e.target.value)
+                                }
                             >
                                 {types.map((type) => (
-                                    <option key={type.id} value={type.id}>
+                                    <option key={type.id} value={type.type}>
                                         {type.name}
                                     </option>
                                 ))}
@@ -117,6 +148,14 @@ function Directions({
                     </div>
                 </>
             )}
+
+            {isLoading && (
+                <div className="absolute top-0 z-20 flex h-full w-full items-center justify-center bg-slate-400 opacity-70">
+                    <Spinner />
+                </div>
+            )}
+
+            {routeNotFound && <div className="p-5">Route not found</div>}
 
             {routes.length > 0 ? (
                 selectedRoute ? (

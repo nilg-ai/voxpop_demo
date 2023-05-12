@@ -4,7 +4,6 @@ export interface IRoute {
     center: [number, number]
     distance: number
     estimated_time: number
-    score: number
     segments: {
         instruction: string
         origin: [number, number]

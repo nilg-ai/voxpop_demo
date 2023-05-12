@@ -1,7 +1,6 @@
 import { AiOutlineClose } from 'react-icons/ai'
 import { IMarker } from '../../interfaces/IMarker'
 import MarkerDetail from './MarkerDetail'
-import { LatLng } from 'leaflet'
 import Directions from './Directions'
 import { IRoute } from '../../interfaces/IRoute'
 
@@ -11,12 +10,14 @@ function Sidebar({
     origin,
     destination,
     selectRoute,
+    setDirectionRoutes,
 }: {
-    selectedMarker: IMarker | undefined
+    selectedMarker: IMarker | null
     closeDetails: () => void
-    origin: LatLng | null
-    destination: LatLng | null
+    origin: string
+    destination: string
     selectRoute: (route: IRoute) => void
+    setDirectionRoutes: (routes: IRoute[]) => void
 }) {
     return (
         <div className="flex h-full flex-col overflow-auto bg-white shadow-[0_0_12px_rgb(0,0,0,0.1)]">
@@ -36,6 +37,7 @@ function Sidebar({
                         origin={origin}
                         destination={destination}
                         selectRoute={selectRoute}
+                        setDirectionRoutes={setDirectionRoutes}
                     ></Directions>
                 </div>
             )}

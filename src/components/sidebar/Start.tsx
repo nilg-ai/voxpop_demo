@@ -1,4 +1,3 @@
-import { AiFillStar } from 'react-icons/ai'
 import { IRoute } from '../../interfaces/IRoute'
 import { TbNavigation } from 'react-icons/tb'
 import { FaRegMap } from 'react-icons/fa'
@@ -20,20 +19,6 @@ function Start({ route }: { route: IRoute }) {
                 <div className="text-xs font-semibold text-nilg-dark-gray">
                     {route.distance} m
                 </div>
-            </div>
-            <div
-                className={
-                    'justify-content flex items-center gap-1 rounded-md py-1 px-2 text-sm font-semibold text-white ' +
-                    `${
-                        route.score > 7
-                            ? 'bg-nilg-green'
-                            : route.score < 3
-                            ? 'bg-nilg-orange'
-                            : 'bg-nilg-yellow'
-                    }`
-                }
-            >
-                <AiFillStar /> {route.score}
             </div>
         </section>
     )
