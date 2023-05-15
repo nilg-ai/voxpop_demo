@@ -56,6 +56,7 @@ function App() {
                             destination={destination}
                             selectRoute={onSelectedRoute}
                             setDirectionRoutes={onSetDirectionRoutes}
+                            setDestination={onSetDestination}
                         />
                     </div>
                 ) : (

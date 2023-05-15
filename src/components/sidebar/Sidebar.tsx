@@ -9,6 +9,7 @@ function Sidebar({
     closeDetails,
     origin,
     destination,
+    setDestination,
     selectRoute,
     setDirectionRoutes,
 }: {
@@ -16,6 +17,7 @@ function Sidebar({
     closeDetails: () => void
     origin: string
     destination: string
+    setDestination: (destination: string) => void
     selectRoute: (route: IRoute | null) => void
     setDirectionRoutes: (routes: IRoute[]) => void
 }) {
@@ -30,7 +32,10 @@ function Sidebar({
                 </button>
             </div>
             {selectedMarker ? (
-                <MarkerDetail selectedMarker={selectedMarker} />
+                <MarkerDetail
+                    selectedMarker={selectedMarker}
+                    setDestination={setDestination}
+                />
             ) : (
                 <div className="mt-10">
                     <Directions

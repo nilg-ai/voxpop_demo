@@ -8,8 +8,10 @@ import Spinner from '../Spinner'
 
 const MarkerDetail = ({
     selectedMarker,
+    setDestination,
 }: {
-    selectedMarker: IMarker | undefined
+    selectedMarker: IMarker | null
+    setDestination: (destination: string) => void
 }) => {
     const [selectedMarkerDetail, setMarkerDetail] = useState<
         IMarker | undefined
@@ -136,7 +138,14 @@ const MarkerDetail = ({
                     <hr className="my-3" />
                     <div className="mt-3 flex justify-center gap-10">
                         <div className="flex flex-col items-center">
-                            <button className="flex h-14 w-14 items-center justify-center rounded-full bg-nilg-blue">
+                            <button
+                                className="flex h-14 w-14 items-center justify-center rounded-full bg-nilg-blue"
+                                onClick={() =>
+                                    setDestination(
+                                        selectedMarker?.address as string
+                                    )
+                                }
+                            >
                                 <BsArrow90DegRight className="text-2xl font-semibold text-white" />
                             </button>
                             <div className="mt-1 text-xs font-semibold">
