@@ -94,7 +94,7 @@ function LocationMarkers({
 
     useEffect(() => {
         if (markers.length === 0 && !isLoading && !isError) {
-            // getData()
+            getData()
         }
     })
 
@@ -127,7 +127,7 @@ function LocationMarkers({
                     }}
                 >
                     <Popup>
-                        <div className="flex flex-col">
+                        <div className="m-2 flex flex-col">
                             <div className="justify-content flex min-w-[12rem] items-center gap-2">
                                 <div className="w-3/5 whitespace-normal">
                                     {marker.address}
