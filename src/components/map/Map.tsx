@@ -18,14 +18,12 @@ import DirectionsPopup from './DirectionsPopup'
 
 function Map({
     selectMarker,
-    directionsClick,
     setOrigin,
     setDestination,
     selectedRoute,
     directionRoutes,
 }: {
     selectMarker: (marker: IMarker) => void
-    directionsClick: (marker: IMarker) => void
     setOrigin: (origin: string) => void
     setDestination: (destination: string) => void
     selectedRoute: IRoute | null
@@ -81,7 +79,7 @@ function Map({
                 />
                 <LocationMarkers
                     selectMarker={selectMarker}
-                    directionsClick={directionsClick}
+                    setDestination={setDestination}
                     setLoading={setLoading}
                     isLoading={isLoading}
                 ></LocationMarkers>

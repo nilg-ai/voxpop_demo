@@ -12,14 +12,18 @@ function DirectionsPopup({
     return (
         <div className="flex flex-col">
             <button
-                onClick={() => setOrigin(position.toString())}
+                onClick={() =>
+                    setOrigin(`coords:${position.lat},${position.lng}`)
+                }
                 className="rounded-t-lg p-2 hover:bg-slate-100"
             >
                 Directions from here
             </button>
 
             <button
-                onClick={() => setDestination(position.toString())}
+                onClick={() =>
+                    setDestination(`coords:${position.lat},${position.lng}`)
+                }
                 className="rounded-b-lg p-2 hover:bg-slate-100"
             >
                 Directions to here

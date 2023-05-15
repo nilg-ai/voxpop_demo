@@ -13,12 +13,12 @@ import 'leaflet/dist/leaflet.css'
 
 function LocationMarkers({
     selectMarker,
-    directionsClick,
+    setDestination,
     setLoading,
     isLoading,
 }: {
     selectMarker: (marker: IMarker) => void
-    directionsClick: (marker: IMarker) => void
+    setDestination: (destination: string) => void
     setLoading: (state: boolean) => void
     isLoading: boolean
 }) {
@@ -135,7 +135,11 @@ function LocationMarkers({
                                 <div className="flex w-2/5 justify-end gap-1">
                                     <button
                                         className="flex h-8 w-8 items-center justify-center rounded-full bg-nilg-blue"
-                                        onClick={() => directionsClick(marker)}
+                                        onClick={() =>
+                                            setDestination(
+                                                `coords:${marker.lat},${marker.long}`
+                                            )
+                                        }
                                     >
                                         <BsArrow90DegRight className="text-sm font-semibold text-white" />
                                     </button>

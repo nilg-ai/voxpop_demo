@@ -142,7 +142,7 @@ const MarkerDetail = ({
                                 className="flex h-14 w-14 items-center justify-center rounded-full bg-nilg-blue"
                                 onClick={() =>
                                     setDestination(
-                                        selectedMarker?.address as string
+                                        `coords:${selectedMarker?.lat},${selectedMarker?.long}`
                                     )
                                 }
                             >

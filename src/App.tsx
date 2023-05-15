@@ -65,9 +65,6 @@ function App() {
                 <div className="relative z-10">
                     <Map
                         selectMarker={onSelectMarker}
-                        directionsClick={(marker) =>
-                            onSetOrigin(marker.address as string)
-                        }
                         setOrigin={onSetOrigin}
                         setDestination={onSetDestination}
                         selectedRoute={selectedRoute}
