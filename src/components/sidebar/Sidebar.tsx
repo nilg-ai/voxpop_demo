@@ -16,7 +16,7 @@ function Sidebar({
     closeDetails: () => void
     origin: string
     destination: string
-    selectRoute: (route: IRoute) => void
+    selectRoute: (route: IRoute | null) => void
     setDirectionRoutes: (routes: IRoute[]) => void
 }) {
     return (

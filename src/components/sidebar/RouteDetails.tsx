@@ -16,8 +16,11 @@ function RouteDetails({ route }: { route: IRoute }) {
                 </span>
                 <div className="absolute left-14 bottom-0 right-5 border border-nilg-gray"></div>
             </div>
-            {route.segments.map((point) => (
-                <div className="relative flex items-center bg-white py-2.5">
+            {route.segments.map((point, i) => (
+                <div
+                    key={i}
+                    className="relative flex items-center bg-white py-2.5"
+                >
                     <div className="p-5">
                         <BsArrow90DegRight />
                     </div>

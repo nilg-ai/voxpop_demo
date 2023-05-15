@@ -35,7 +35,7 @@ function App() {
         setDestination(destination)
     }
 
-    function onSelectedRoute(route: IRoute) {
+    function onSelectedRoute(route: IRoute | null) {
         setSelectedRoute(route)
     }
 

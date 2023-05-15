@@ -23,7 +23,7 @@ function Directions({
     origin: string
     destination: string
     setDirectionRoutes: (routes: IRoute[]) => void
-    selectRoute: (route: IRoute) => void
+    selectRoute: (route: IRoute | null) => void
 }) {
     const [selectedType, setSelectedType] = useState<string>(types[0].type)
     const [routes, setRoutes] = useState<IRoute[]>([])
@@ -42,6 +42,8 @@ function Directions({
             setRoutes([])
             setDirectionRoutes([])
             setSelectedRoute(null)
+            selectRoute(null)
+
             fetch(
                 `${process.env.REACT_APP_API_URL}/get-route?origin=${originValue}&destination=${destinationValue}&wheelchair_type=${selectedType}`,
                 {
