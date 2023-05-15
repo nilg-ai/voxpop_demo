@@ -8,6 +8,7 @@ import { IRoute } from '../../interfaces/IRoute'
 import AvailableRoutes from './AvailableRoutes'
 import RouteDetails from './RouteDetails'
 import Spinner from '../Spinner'
+import useDebounce from '../../utils/use-debounce'
 
 const types = [
     { id: 1, name: 'Basic', type: 'electrical' },
@@ -28,14 +29,10 @@ function Directions({
     const [selectedType, setSelectedType] = useState<string>(types[0].type)
     const [routes, setRoutes] = useState<IRoute[]>([])
     const [selectedRoute, setSelectedRoute] = useState<IRoute>()
-    const debounceOrigin = debounce((value) => setOriginValue(value), 2000)
-    const debounceDestination = debounce(
-        (value) => setDestinationValue(value),
-        2000
-    )
 
     const [originValue, setOriginValue] = useState(origin)
     const [destinationValue, setDestinationValue] = useState(destination)
+
     const [isLoading, setLoading] = useState<boolean>(false)
     const [routeNotFound, setRouteNotFound] = useState<boolean>(false)
 
@@ -47,10 +44,12 @@ function Directions({
         setDestinationValue(destination)
     }, [destination])
 
-    useEffect(() => {
+    const debouncedRequest = useDebounce(() => {
         if (originValue && destinationValue && selectedType) {
             setLoading(true)
             setRouteNotFound(false)
+            setRoutes([])
+            setDirectionRoutes([])
             fetch(
                 `${process.env.REACT_APP_API_URL}/get-route?origin=${originValue}&destination=${destinationValue}&wheelchair_type=${selectedType}`,
                 {
@@ -63,10 +62,12 @@ function Directions({
                 .then((res) => res.json())
                 .then((res) => {
                     if (res.STATUS === 'SUCCESS') {
+                        // for showing the route details
                         setRoutes([
                             res.DATA[0].best_route,
                             ...res.DATA[0].other_routes,
                         ])
+                        // in the map the last route is on top
                         setDirectionRoutes([
                             ...res.DATA[0].other_routes,
                             res.DATA[0].best_route,
@@ -82,7 +83,15 @@ function Directions({
                     setLoading(false)
                 })
         }
-    }, [originValue, destinationValue, selectedType])
+    }, 2000)
+
+    function onSwitchClick() {
+        const localOrigin = `${originValue}`
+        const localDestination = `${destinationValue}`
+        setOriginValue(localDestination)
+        setDestinationValue(localOrigin)
+        debouncedRequest()
+    }
 
     function onRouteClick(route: IRoute) {
         setSelectedRoute(route)
@@ -106,27 +115,33 @@ function Directions({
                             <input
                                 className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
                                 type="text"
-                                defaultValue={originValue}
-                                onChange={(e) => debounceOrigin(e.target.value)}
+                                value={originValue}
+                                onChange={(e) => {
+                                    setOriginValue(e.target.value)
+                                    debouncedRequest()
+                                }}
                             />
                             <input
                                 className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
                                 type="text"
-                                defaultValue={destinationValue}
-                                onChange={(e) =>
-                                    debounceDestination(e.target.value)
-                                }
+                                value={destinationValue}
+                                onChange={(e) => {
+                                    setDestinationValue(e.target.value)
+                                    debouncedRequest()
+                                }}
                             />
                         </div>
                         <div className="flex flex-col items-center gap-12">
                             <BsThreeDots />
-                            <HiOutlineArrowsUpDown />
+                            <button onClick={() => onSwitchClick()}>
+                                <HiOutlineArrowsUpDown />
+                            </button>
                         </div>
                     </div>
 
                     <div className="mt-4 flex items-center border-t border-nilg-gray px-5 py-3">
                         <span className="mr-4 text-sm font-semibold text-nilg-dark-gray">
-                            Wheelchair type:{' '}
+                            Wheelchair type:
                         </span>
                         <div>
                             <select
@@ -155,7 +170,9 @@ function Directions({
                 </div>
             )}
 
-            {routeNotFound && <div className="p-5">Route not found</div>}
+            {routeNotFound && routes.length === 0 && (
+                <div className="p-5">Route not found</div>
+            )}
 
             {routes.length > 0 ? (
                 selectedRoute ? (
