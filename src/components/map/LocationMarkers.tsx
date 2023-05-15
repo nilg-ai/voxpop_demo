@@ -94,7 +94,7 @@ function LocationMarkers({
 
     useEffect(() => {
         if (markers.length === 0 && !isLoading && !isError) {
-            getData()
+            // getData()
         }
     })
 

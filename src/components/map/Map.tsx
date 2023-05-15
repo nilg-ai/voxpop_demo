@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { LatLng } from 'leaflet'
+import L, { LatLng, Map as LeafletMap } from 'leaflet'
 import {
     TileLayer,
     MapContainer,
@@ -34,6 +34,18 @@ function Map({
     const [isLoading, setLoading] = useState<boolean>(false)
     const [showDirectionsPopup, setShowDirectionsPopup] = useState(false)
     const [cursorPos, setCursorPos] = useState<LatLng | null>(null)
+    const [map, setMap] = useState<LeafletMap | null>(null)
+
+    useEffect(() => {
+        if (map && directionRoutes.length > 0) {
+            const bestRoute = directionRoutes[0]
+            const point = bestRoute.center
+            const bounds = new L.LatLng(point[0], point[1]).toBounds(
+                bestRoute.distance
+            )
+            map.flyToBounds(bounds)
+        }
+    }, [directionRoutes, map])
 
     const MapEvents = () => {
         useMapEvents({
@@ -61,6 +73,7 @@ function Map({
                 className="relative z-10 h-screen"
                 center={[38.75, -9.15]}
                 zoom={13}
+                ref={setMap}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -84,20 +97,6 @@ function Map({
                         />
                     </Popup>
                 )}
-
-                {/* {selectedRoute &&
-                    selectedRoute.segments.map((point, i) => (
-                        <Polyline
-                            key={i}
-                            positions={[
-                                [point.origin[1], point.origin[0]],
-                                [point.destination[1], point.destination[0]],
-                            ]}
-                            color={'#353cdd'}
-                            weight={8}
-                            smoothFactor={1}
-                        />
-                    ))} */}
 
                 {selectedRoute
                     ? selectedRoute.segments.map((point, i) => (

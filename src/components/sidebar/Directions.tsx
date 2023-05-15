@@ -35,14 +35,6 @@ function Directions({
     const [isLoading, setLoading] = useState<boolean>(false)
     const [routeNotFound, setRouteNotFound] = useState<boolean>(false)
 
-    useEffect(() => {
-        setOriginValue(origin)
-    }, [origin])
-
-    useEffect(() => {
-        setDestinationValue(destination)
-    }, [destination])
-
     const debouncedRequest = useDebounce(() => {
         if (originValue && destinationValue && selectedType) {
             setLoading(true)
@@ -85,6 +77,16 @@ function Directions({
         }
     }, 2000)
 
+    useEffect(() => {
+        setOriginValue(origin)
+        debouncedRequest()
+    }, [origin, debouncedRequest])
+
+    useEffect(() => {
+        setDestinationValue(destination)
+        debouncedRequest()
+    }, [destination, debouncedRequest])
+
     function onSwitchClick() {
         const localOrigin = `${originValue}`
         const localDestination = `${destinationValue}`
@@ -101,9 +103,10 @@ function Directions({
     return (
         <section>
             <div className="grid grid-cols-[50px_minmax(0,_1fr)_50px] items-center">
-                <div className="flex flex-col items-center gap-12">
-                    <FaDotCircle />
-                    <FaFlagCheckered />
+                <div className="flex flex-col items-center gap-5">
+                    <FaDotCircle className="text-nilg-blue" />
+                    <div className="h-4 border-2 border-dashed border-nilg-gray"></div>
+                    <FaFlagCheckered className="text-nilg-orange" />
                 </div>
                 <div className="flex flex-col gap-4">
                     <input
