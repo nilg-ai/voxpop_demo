@@ -11,4 +11,5 @@ export interface IRoute {
         score: number
     }[]
     average_accessibility: number
+    color: string
 }

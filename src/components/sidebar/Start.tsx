@@ -1,6 +1,8 @@
-import { IRoute } from '../../interfaces/IRoute'
 import { TbNavigation } from 'react-icons/tb'
 import { FaRegMap } from 'react-icons/fa'
+
+import { IRoute } from '../../interfaces/IRoute'
+import ScorePill from './ScorePill'
 
 function Start({ route }: { route: IRoute }) {
     return (
@@ -12,7 +14,7 @@ function Start({ route }: { route: IRoute }) {
                 <FaRegMap className="text-nilg-blue" />{' '}
                 <span className="nilg-black">Map</span>
             </button>
-            <div className="ml-auto flex flex-col whitespace-nowrap text-right">
+            <div className="ml-auto mr-3 flex flex-col whitespace-nowrap text-right">
                 <div className="text-sm font-semibold text-nilg-black">
                     {Math.round(route.estimated_time)} min
                 </div>
@@ -20,6 +22,7 @@ function Start({ route }: { route: IRoute }) {
                     {route.distance} m
                 </div>
             </div>
+            <ScorePill route={route} />
         </section>
     )
 }

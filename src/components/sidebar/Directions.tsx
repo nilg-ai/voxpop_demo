@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import { FaDotCircle, FaFlagCheckered } from 'react-icons/fa'
 import { HiOutlineArrowsUpDown } from 'react-icons/hi2'
-import { debounce } from 'lodash-es'
 
 import { IRoute } from '../../interfaces/IRoute'
 import AvailableRoutes from './AvailableRoutes'
@@ -11,8 +10,8 @@ import Spinner from '../Spinner'
 import useDebounce from '../../utils/use-debounce'
 
 const types = [
-    { id: 1, name: 'Basic', type: 'electrical' },
-    { id: 2, name: 'Motor', type: 'electrical' },
+    { id: 1, name: 'Manual', type: 'manual' },
+    { id: 2, name: 'Electrical', type: 'electrical' },
 ]
 
 function Directions({
@@ -28,7 +27,7 @@ function Directions({
 }) {
     const [selectedType, setSelectedType] = useState<string>(types[0].type)
     const [routes, setRoutes] = useState<IRoute[]>([])
-    const [selectedRoute, setSelectedRoute] = useState<IRoute>()
+    const [selectedRoute, setSelectedRoute] = useState<IRoute | null>()
 
     const [originValue, setOriginValue] = useState(origin)
     const [destinationValue, setDestinationValue] = useState(destination)
@@ -50,6 +49,7 @@ function Directions({
             setRouteNotFound(false)
             setRoutes([])
             setDirectionRoutes([])
+            setSelectedRoute(null)
             fetch(
                 `${process.env.REACT_APP_API_URL}/get-route?origin=${originValue}&destination=${destinationValue}&wheelchair_type=${selectedType}`,
                 {
@@ -100,69 +100,62 @@ function Directions({
 
     return (
         <section>
-            {selectedRoute ? (
-                <div className="px-5 pb-5 font-semibold">
-                    {selectedRoute.name}
+            <div className="grid grid-cols-[50px_minmax(0,_1fr)_50px] items-center">
+                <div className="flex flex-col items-center gap-12">
+                    <FaDotCircle />
+                    <FaFlagCheckered />
                 </div>
-            ) : (
-                <>
-                    <div className="grid grid-cols-[50px_minmax(0,_1fr)_50px] items-center">
-                        <div className="flex flex-col items-center gap-12">
-                            <FaDotCircle />
-                            <FaFlagCheckered />
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <input
-                                className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
-                                type="text"
-                                value={originValue}
-                                onChange={(e) => {
-                                    setOriginValue(e.target.value)
-                                    debouncedRequest()
-                                }}
-                            />
-                            <input
-                                className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
-                                type="text"
-                                value={destinationValue}
-                                onChange={(e) => {
-                                    setDestinationValue(e.target.value)
-                                    debouncedRequest()
-                                }}
-                            />
-                        </div>
-                        <div className="flex flex-col items-center gap-12">
-                            <BsThreeDots />
-                            <button onClick={() => onSwitchClick()}>
-                                <HiOutlineArrowsUpDown />
-                            </button>
-                        </div>
-                    </div>
+                <div className="flex flex-col gap-4">
+                    <input
+                        className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
+                        type="text"
+                        value={originValue}
+                        onChange={(e) => {
+                            setOriginValue(e.target.value)
+                            debouncedRequest()
+                        }}
+                    />
+                    <input
+                        className="block w-full rounded-[8px] p-3 text-gray-900 ring-1 ring-nilg-gray focus:outline-none"
+                        type="text"
+                        value={destinationValue}
+                        onChange={(e) => {
+                            setDestinationValue(e.target.value)
+                            debouncedRequest()
+                        }}
+                    />
+                </div>
+                <div className="flex flex-col items-center gap-12">
+                    <BsThreeDots />
+                    <button onClick={() => onSwitchClick()}>
+                        <HiOutlineArrowsUpDown />
+                    </button>
+                </div>
+            </div>
 
-                    <div className="mt-4 flex items-center border-t border-nilg-gray px-5 py-3">
-                        <span className="mr-4 text-sm font-semibold text-nilg-dark-gray">
-                            Wheelchair type:
-                        </span>
-                        <div>
-                            <select
-                                id="type"
-                                name="type"
-                                className="block w-full rounded-md border-0 py-1.5 text-nilg-black"
-                                defaultValue={types[0].type}
-                                onChange={(e) =>
-                                    setSelectedType(e.target.value)
-                                }
-                            >
-                                {types.map((type) => (
-                                    <option key={type.id} value={type.type}>
-                                        {type.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-                </>
-            )}
+            <div className="mt-4 flex items-center border-t border-nilg-gray px-5 py-3">
+                <span className="mr-4 text-sm font-semibold text-nilg-dark-gray">
+                    Wheelchair type:
+                </span>
+                <div>
+                    <select
+                        id="type"
+                        name="type"
+                        className="block w-full rounded-md border-0 py-1.5 text-nilg-black"
+                        defaultValue={types[0].type}
+                        onChange={(e) => {
+                            setSelectedType(e.target.value)
+                            debouncedRequest()
+                        }}
+                    >
+                        {types.map((type) => (
+                            <option key={type.id} value={type.type}>
+                                {type.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
 
             {isLoading && (
                 <div className="absolute top-0 z-20 flex h-full w-full items-center justify-center bg-slate-400 opacity-70">

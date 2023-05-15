@@ -1,5 +1,6 @@
 import { AiFillStar } from 'react-icons/ai'
 import { IRoute } from '../../interfaces/IRoute'
+import ScorePill from './ScorePill'
 
 function Route({
     route,
@@ -24,13 +25,7 @@ function Route({
                     {route.distance} m
                 </div>
             </div>
-            <div
-                className={
-                    'justify-content flex items-center gap-1 rounded-md bg-nilg-green py-1 px-2 text-sm font-semibold text-white'
-                }
-            >
-                <AiFillStar /> {route.average_accessibility}
-            </div>
+            <ScorePill route={route} />
         </section>
     )
 }

@@ -48,7 +48,7 @@ function App() {
             <Header></Header>
             <div className="relative">
                 {isShowingSidebar ? (
-                    <div className="absolute z-50 h-full w-full sm:w-full md:w-1/3 lg:w-1/4">
+                    <div className="absolute z-50 h-full w-full sm:w-full md:w-1/2 lg:w-1/4">
                         <Sidebar
                             selectedMarker={selectedMarker}
                             closeDetails={onCloseDetails}
