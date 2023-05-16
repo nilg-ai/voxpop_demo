@@ -2,14 +2,10 @@
   height: calc(100vh - 75px);
 }
 
-.leaflet-marker-icon {
-  border: none;
-  background: none;
+.leaflet-popup-content {
+  margin: 0 !important;
 }
 
-.marker-cluster-large div,
-.marker-cluster-medium div,
-.marker-cluster-small div {
-  background-color: #353cdd;
-  color: white;
+.leaflet-popup-close-button {
+  display: none;
 }

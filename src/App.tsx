@@ -1,40 +1,79 @@
-import React, { useState } from 'react';
-import CookieBanner from './components/cookie-banner/CookieBanner';
-import Header from './components/header/Header';
-import Map from './components/map/Map';
-import MarkerDetail from './components/marker-detail/MarkerDetail';
-import { IMarker } from './interfaces/IMarker';
+import React, { useState } from 'react'
+import { IMarker } from './interfaces/IMarker'
+import CookieBanner from './components/cookie-banner/CookieBanner'
+import Header from './components/header/Header'
+import Map from './components/map/Map'
+import Sidebar from './components/sidebar/Sidebar'
+import { IRoute } from './interfaces/IRoute'
 
 function App() {
-  const [isShowingDetail, showDetail] = React.useState(false);
-  const [selectedMarker, setSelectedMarker] = useState<IMarker | undefined>(undefined);
+    const [isShowingSidebar, showSidebar] = useState(false)
+    const [selectedMarker, setSelectedMarker] = useState<IMarker | null>(null)
+    const [origin, setOrigin] = useState<string>('')
+    const [destination, setDestination] = useState<string>('')
+    const [selectedRoute, setSelectedRoute] = useState<IRoute | null>(null)
+    const [directionRoutes, setDirectionRoutes] = useState<IRoute[]>([])
 
-  function closeDetails() {
-    showDetail(false);
-  }
+    function onCloseDetails() {
+        showSidebar(false)
+    }
 
-  function onSelectMarker(marker: IMarker) {
-    showDetail(true);
-    setSelectedMarker(marker);
-  }
+    function onSelectMarker(marker: IMarker) {
+        showSidebar(true)
+        setSelectedMarker(marker)
+    }
 
-  return (
-    <>
-      <Header></Header>
-      <div className="relative">
-        {isShowingDetail ? (
-          <div className="absolute h-full sm:w-full md:w-1/3 lg:w-1/4 w-full z-50">
-            <MarkerDetail selectedMarker={selectedMarker} onCloseDetails={closeDetails}></MarkerDetail>
-          </div>
-        ) : (
-          <></>
-        )}
-        <div className="relative z-10">
-          <Map onSelectMarker={onSelectMarker}></Map>
-        </div>
-      </div>
-      <CookieBanner />
-    </>
-  );
+    function onSetOrigin(origin: string) {
+        showSidebar(true)
+        setSelectedMarker(null)
+        setOrigin(origin)
+    }
+
+    function onSetDestination(destination: string) {
+        showSidebar(true)
+        setSelectedMarker(null)
+        setDestination(destination)
+    }
+
+    function onSelectedRoute(route: IRoute | null) {
+        setSelectedRoute(route)
+    }
+
+    function onSetDirectionRoutes(routes: IRoute[]) {
+        setDirectionRoutes(routes)
+    }
+
+    return (
+        <>
+            <Header></Header>
+            <div className="relative">
+                {isShowingSidebar ? (
+                    <div className="absolute z-50 h-full w-full sm:w-full md:w-1/2 lg:w-1/4">
+                        <Sidebar
+                            selectedMarker={selectedMarker}
+                            closeDetails={onCloseDetails}
+                            origin={origin}
+                            destination={destination}
+                            selectRoute={onSelectedRoute}
+                            setDirectionRoutes={onSetDirectionRoutes}
+                            setDestination={onSetDestination}
+                        />
+                    </div>
+                ) : (
+                    <></>
+                )}
+                <div className="relative z-10">
+                    <Map
+                        selectMarker={onSelectMarker}
+                        setOrigin={onSetOrigin}
+                        setDestination={onSetDestination}
+                        selectedRoute={selectedRoute}
+                        directionRoutes={directionRoutes}
+                    ></Map>
+                </div>
+            </div>
+            <CookieBanner />
+        </>
+    )
 }
-export default App;
+export default App
