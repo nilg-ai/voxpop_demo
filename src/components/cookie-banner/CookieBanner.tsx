@@ -120,7 +120,7 @@ function CookieModal({
 
                                 <div className="flex w-full justify-end border-t p-5">
                                     <button
-                                        className="group flex h-min items-center justify-center rounded-lg border border-transparent bg-green-700 p-0.5 text-center font-medium text-white hover:bg-green-800 focus:z-10 focus:ring-4 focus:!ring-2 focus:ring-green-300 disabled:hover:bg-green-700 "
+                                        className="focus:!ring-2 group flex h-min items-center justify-center rounded-lg border border-transparent bg-green-700 p-0.5 text-center font-medium text-white hover:bg-green-800 focus:z-10 focus:ring-4 focus:ring-green-300 disabled:hover:bg-green-700 "
                                         onClick={() => onAccept()}
                                     >
                                         <span className="flex items-center rounded-md px-4 py-2 text-sm">
@@ -152,7 +152,7 @@ function CookieBanner() {
         <>
             {!acceptedCookie ? (
                 <>
-                    <div className="fixed bottom-0 left-0 z-40 flex w-screen items-center justify-center bg-white">
+                    <div className="fixed bottom-0 left-0 z-50 flex w-screen items-center justify-center bg-white">
                         <div className="w-9/12 p-3">
                             We use cookies on our website to give you the most
                             relevant experience by remembering your preferences
@@ -163,7 +163,7 @@ function CookieBanner() {
                         </div>
                         <div className="flex w-3/12 flex-col justify-center gap-2 p-3 md:flex-row">
                             <button
-                                className="group flex h-min items-center justify-center rounded-lg border border-gray-300 bg-white p-0.5 text-center font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:!ring-2 focus:ring-blue-300 disabled:hover:bg-white"
+                                className="focus:!ring-2 group flex h-min items-center justify-center rounded-lg border border-gray-300 bg-white p-0.5 text-center font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-blue-300 disabled:hover:bg-white"
                                 color="light"
                                 onClick={() => setVisible(true)}
                             >
@@ -173,7 +173,7 @@ function CookieBanner() {
                             </button>
 
                             <button
-                                className="group flex h-min items-center justify-center rounded-lg border border-transparent bg-green-700 p-0.5 text-center font-medium text-white hover:bg-green-800 focus:z-10 focus:ring-4 focus:!ring-2 focus:ring-green-300 disabled:hover:bg-green-700"
+                                className="focus:!ring-2 group flex h-min items-center justify-center rounded-lg border border-transparent bg-green-700 p-0.5 text-center font-medium text-white hover:bg-green-800 focus:z-10 focus:ring-4 focus:ring-green-300 disabled:hover:bg-green-700"
                                 onClick={() => acceptCookies()}
                             >
                                 <span className="flex items-center rounded-md px-4 py-2 text-sm">
