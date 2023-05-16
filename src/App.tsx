@@ -55,6 +55,7 @@ function App() {
                             origin={origin}
                             destination={destination}
                             selectRoute={onSelectedRoute}
+                            selectedRoute={selectedRoute}
                             setDirectionRoutes={onSetDirectionRoutes}
                             setDestination={onSetDestination}
                         />
@@ -67,6 +68,7 @@ function App() {
                         selectMarker={onSelectMarker}
                         setOrigin={onSetOrigin}
                         setDestination={onSetDestination}
+                        routeClick={onSelectedRoute}
                         selectedRoute={selectedRoute}
                         directionRoutes={directionRoutes}
                     ></Map>

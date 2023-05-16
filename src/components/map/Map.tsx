@@ -20,12 +20,14 @@ function Map({
     selectMarker,
     setOrigin,
     setDestination,
+    routeClick,
     selectedRoute,
     directionRoutes,
 }: {
     selectMarker: (marker: IMarker) => void
     setOrigin: (origin: string) => void
     setDestination: (destination: string) => void
+    routeClick: (route: IRoute) => void
     selectedRoute: IRoute | null
     directionRoutes: IRoute[]
 }) {
@@ -127,6 +129,9 @@ function Map({
                                   }
                                   weight={8}
                                   smoothFactor={1}
+                                  eventHandlers={{
+                                      click: () => routeClick(route),
+                                  }}
                               />
                           ))
                       })}

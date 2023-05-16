@@ -19,15 +19,16 @@ function Directions({
     destination,
     setDirectionRoutes,
     selectRoute,
+    selectedRoute,
 }: {
     origin: string
     destination: string
     setDirectionRoutes: (routes: IRoute[]) => void
     selectRoute: (route: IRoute | null) => void
+    selectedRoute: IRoute | null
 }) {
     const [selectedType, setSelectedType] = useState<string>(types[0].type)
     const [routes, setRoutes] = useState<IRoute[]>([])
-    const [selectedRoute, setSelectedRoute] = useState<IRoute | null>()
 
     const [originValue, setOriginValue] = useState(origin)
     const [destinationValue, setDestinationValue] = useState(destination)
@@ -41,7 +42,6 @@ function Directions({
             setRouteNotFound(false)
             setRoutes([])
             setDirectionRoutes([])
-            setSelectedRoute(null)
             selectRoute(null)
 
             fetch(
@@ -98,12 +98,10 @@ function Directions({
     }
 
     function onRouteClick(route: IRoute) {
-        setSelectedRoute(route)
         selectRoute(route)
     }
 
     function onBackClick() {
-        setSelectedRoute(null)
         selectRoute(null)
     }
 
