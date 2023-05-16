@@ -3,10 +3,16 @@ import { IRoute } from '../../interfaces/IRoute'
 import Start from './Start'
 import { BsArrow90DegRight } from 'react-icons/bs'
 
-function RouteDetails({ route }: { route: IRoute }) {
+function RouteDetails({
+    route,
+    backPressed,
+}: {
+    route: IRoute
+    backPressed: () => void
+}) {
     return (
         <section className="bg-nilg-gray">
-            <Start route={route} />
+            <Start route={route} backPressed={backPressed} />
             <div className="relative mt-2.5 flex items-center bg-white">
                 <div className="p-5 text-nilg-blue">
                     <FaDotCircle />
@@ -14,7 +20,7 @@ function RouteDetails({ route }: { route: IRoute }) {
                 <span className="relative text-sm font-semibold">
                     Your location
                 </span>
-                <div className="absolute left-14 bottom-0 right-5 border border-nilg-gray"></div>
+                <div className="absolute bottom-0 left-14 right-5 border border-nilg-gray"></div>
             </div>
             {route.segments.map((point, i) => (
                 <div
@@ -28,7 +34,7 @@ function RouteDetails({ route }: { route: IRoute }) {
                         {point.instruction}
                     </span>
 
-                    <div className="absolute left-14 bottom-0 right-5 flex items-center">
+                    <div className="absolute bottom-0 left-14 right-5 flex items-center">
                         <span className="whitespace-nowrap text-[10px] text-nilg-dark-gray">
                             100 m
                         </span>

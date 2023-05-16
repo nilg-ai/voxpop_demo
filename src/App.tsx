@@ -45,16 +45,17 @@ function App() {
 
     return (
         <>
-            <Header></Header>
+            <Header searchChange={onSetDestination}></Header>
             <div className="relative">
                 {isShowingSidebar ? (
-                    <div className="absolute z-50 h-full w-full sm:w-full md:w-1/2 lg:w-1/4">
+                    <div className="md:w-1/2 lg:w-1/3 absolute z-30 h-full w-full sm:w-full">
                         <Sidebar
                             selectedMarker={selectedMarker}
                             closeDetails={onCloseDetails}
                             origin={origin}
                             destination={destination}
                             selectRoute={onSelectedRoute}
+                            selectedRoute={selectedRoute}
                             setDirectionRoutes={onSetDirectionRoutes}
                             setDestination={onSetDestination}
                         />
@@ -67,6 +68,7 @@ function App() {
                         selectMarker={onSelectMarker}
                         setOrigin={onSetOrigin}
                         setDestination={onSetDestination}
+                        routeClick={onSelectedRoute}
                         selectedRoute={selectedRoute}
                         directionRoutes={directionRoutes}
                     ></Map>

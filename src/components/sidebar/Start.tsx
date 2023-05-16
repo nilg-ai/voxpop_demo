@@ -1,18 +1,23 @@
-import { TbNavigation } from 'react-icons/tb'
-import { FaRegMap } from 'react-icons/fa'
+import { IoArrowBackOutline } from 'react-icons/io5'
 
 import { IRoute } from '../../interfaces/IRoute'
 import ScorePill from './ScorePill'
 
-function Start({ route }: { route: IRoute }) {
+function Start({
+    route,
+    backPressed,
+}: {
+    route: IRoute
+    backPressed: () => void
+}) {
     return (
         <section className="flex cursor-pointer cursor-pointer items-center gap-2 border-nilg-gray bg-white px-5 pb-5">
-            <button className="flex items-center gap-2 rounded-[40px] bg-nilg-blue py-2.5 px-4 text-sm font-semibold text-white">
-                <TbNavigation /> Start
-            </button>
-            <button className="border-1 flex items-center gap-2 rounded-[40px] border border-nilg-gray py-2.5 px-4 text-sm font-semibold">
-                <FaRegMap className="text-nilg-blue" />{' '}
-                <span className="nilg-black">Map</span>
+            <button
+                className="border-1 flex items-center gap-2 rounded-[40px] border border-nilg-gray px-4 py-2.5 text-sm font-semibold"
+                onClick={() => backPressed()}
+            >
+                <IoArrowBackOutline className="text-black" />
+                <span className="nilg-black">Go back</span>
             </button>
             <div className="ml-auto mr-3 flex flex-col whitespace-nowrap text-right">
                 <div className="text-sm font-semibold text-nilg-black">
