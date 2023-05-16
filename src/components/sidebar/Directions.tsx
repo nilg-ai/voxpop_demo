@@ -102,6 +102,11 @@ function Directions({
         selectRoute(route)
     }
 
+    function onBackClick() {
+        setSelectedRoute(null)
+        selectRoute(null)
+    }
+
     return (
         <section>
             <div className="grid grid-cols-[50px_minmax(0,_1fr)_50px] items-center">
@@ -174,7 +179,10 @@ function Directions({
 
             {routes.length > 0 ? (
                 selectedRoute ? (
-                    <RouteDetails route={selectedRoute} />
+                    <RouteDetails
+                        route={selectedRoute}
+                        backPressed={onBackClick}
+                    />
                 ) : (
                     <AvailableRoutes
                         routes={routes}

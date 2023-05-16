@@ -48,7 +48,7 @@ function App() {
             <Header searchChange={onSetDestination}></Header>
             <div className="relative">
                 {isShowingSidebar ? (
-                    <div className="md:w-1/2 lg:w-1/4 absolute z-30 h-full w-full sm:w-full">
+                    <div className="md:w-1/2 lg:w-1/3 absolute z-30 h-full w-full sm:w-full">
                         <Sidebar
                             selectedMarker={selectedMarker}
                             closeDetails={onCloseDetails}
