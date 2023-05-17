@@ -36,7 +36,7 @@ function RouteDetails({
 
                     <div className="absolute bottom-0 left-14 right-5 flex items-center">
                         <span className="whitespace-nowrap text-[10px] text-nilg-dark-gray">
-                            100 m
+                            {point.distance} m
                         </span>
                         <hr className="ml-2 w-full border border-nilg-gray" />
                     </div>
