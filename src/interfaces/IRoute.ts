@@ -9,6 +9,7 @@ export interface IRoute {
         origin: [number, number]
         destination: [number, number]
         score: number
+        distance: number
     }[]
     average_accessibility: number
     color: string
