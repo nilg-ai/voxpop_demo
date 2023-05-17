@@ -10,11 +10,12 @@ import {
 } from 'react-leaflet'
 import { IMarker } from '../../interfaces/IMarker'
 import Spinner from '../Spinner'
-import './Map.scss'
-import 'leaflet/dist/leaflet.css'
 import { IRoute } from '../../interfaces/IRoute'
 import LocationMarkers from './LocationMarkers'
 import DirectionsPopup from './DirectionsPopup'
+
+import 'leaflet/dist/leaflet.css'
+import './Map.scss'
 
 function Map({
     selectMarker,

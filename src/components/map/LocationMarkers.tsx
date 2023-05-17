@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import L, { LatLng, marker } from 'leaflet'
+import L, { LatLng } from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 
@@ -10,6 +10,7 @@ import { BsArrow90DegRight } from 'react-icons/bs'
 import { IMarker } from '../../interfaces/IMarker'
 import './LocationMarkers.scss'
 import 'leaflet/dist/leaflet.css'
+import markerImg from '../../assets/marker.svg'
 
 function LocationMarkers({
     selectMarker,
@@ -44,7 +45,7 @@ function LocationMarkers({
         })
 
     const selectedMarkerHtmlStyles = `
-  background-image: url(${marker});
+  background-image: url(${markerImg});
   width: 2rem;
   height: 2rem;
   left: -0.45rem;
