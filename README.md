@@ -20,7 +20,7 @@ src
 Specialized navigation application designed to provide directions for individuals with mobility challenges, like using an wheelchair. It aims to offer an accessible and user-friendly mapping service. The app leverages an API to retrieve directions from a starting point to a destination, taking into account various accessibility factors.
 Key Features
 
--   **Wheelchair-friendly Routing:** The app calculates and displays routes that are accessible to individuals using wheelchairs, considering factors such as ** Add factors here **
+-   **Wheelchair-friendly Routing:** The app calculates and displays routes that are accessible to individuals using wheelchairs, considering factors such as the existence of sidewalk / crosswalk, the existence of a ramp in crosswalks, sidewalk width and sidewalk pavement type.
 -   **Scoring System:** The API used by the app provides paths with scores, indicating the level of accessibility for each route. The app prioritizes the best score to recommend the optimal route for the user.
 -   **Point of Interest Markers:** The map view displays markers representing various points of interest for individuals in wheelchairs. Each marker provides important accessibility information such as "Irregular Sidewalk," "Crosswalk Contains a Ramp," or "No Crosswalk."
 -   **User Validation:** Users can view the details of each point of interest and contribute to the validation process by upvoting or downvoting the accuracy of the provided information.
@@ -256,8 +256,6 @@ By providing comprehensive point information, allowing users to review and valid
   ]
 }
 ```
-
-## Contact
 
 ## Learn More
 
