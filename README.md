@@ -5,13 +5,15 @@ The project node 18.14.0
 
 ## Project Structure
 
-`src
+```
+src
 ├── assets # Contains static assets like images, fonts, etc.
 ├── components # Reusable React components
 ├── interfaces # TypeScript interfaces or types for data structures
 ├── utils # Utility functions or helper modules
 ├── App.tsx # Entry point of your React app
-└── index.tsx # Main entry point for rendering the React app`
+└── index.tsx # Main entry point for rendering the React app
+```
 
 ## Description
 
@@ -60,14 +62,18 @@ By providing comprehensive point information, allowing users to review and valid
 
 ### Get Point of Interest
 
-**Endpoint:** GET /list-all-points
+**Endpoint:** GET `/list-all-points`
+
 **Description:** This API call retrieves the list of points of interest markers for individuals in wheelchairs. It returns an array of markers representing various locations on the map
-**Response:** `MESSAGE
-: 
-"Returned list of all points."
-    MESSAGE_CODE: 0,
-    STATUS: "SUCCESS", 
-    DATA: [{
+
+**Response:**
+
+```
+{
+  MESSAGE: "Returned list of all points."
+  MESSAGE_CODE: 0,
+  STATUS: "SUCCESS",
+  DATA: [{
     "lat": "38.7565536",
     "long": "-9.1399819",
     "pavement_type": "irregular",
@@ -81,15 +87,23 @@ By providing comprehensive point information, allowing users to review and valid
     "GOOGLE_MAPS_URL": "http://maps.google.com/maps?q=&layer=c&cbll=38.7565536,-9.1399819&cbp=11,0,0,0,0",
     "point_color_code": "#00FF00",
     "img_name": "Av. Rio de Janeiro 54C, 1700-125 Lisboa, Portugal"
-}]`
+  }]
+}
+```
 
 ### Get Marker Details
 
-**Endpoint:** GET /get-point-metadata?lat=${lat}&longt=${long}
+**Endpoint:** GET `/get-point-metadata?lat=${lat}&longt=${long}`
+
 **Description:** This API call retrieves detailed information about a specific point of interest marker. The `lat` and `longt` parameters in the endpoint represent the latitude and longitude coordinates of the marker. The response includes information such as the accessibility features and the associated score provided by other users. Users can access this information to gain a better understanding of the accessibility of a particular location.
-**Response:** `MESSAGE_CODE: 0,
-    STATUS: "SUCCESS", 
-    DATA: {
+
+**Response:**
+
+```
+{
+  MESSAGE_CODE: 0,
+  STATUS: "SUCCESS",
+  DATA: {
     "likes": 0,
     "dislikes": 0,
     "lat": 38.78397169209848,
@@ -98,137 +112,150 @@ By providing comprehensive point information, allowing users to review and valid
     "GOOGLE_MAPS_URL": "http://maps.google.com/maps?q=&layer=c&cbll=38.78397169209848,-9.12971420489252&cbp=11,0,0,0,0",
     "address": "Estrada da Circunvalação 12, 2685 Prior Velho, Portugal",
     "features": [
-        {
-            "label": "Irregular sidewalk",
-            "prob": 0.81273973,
-            "icon": "https://voxpop-icons.s3.eu-west-1.amazonaws.com/irregular_sidewalk.png"
-        },
-        {
-            "label": "Crosswalk with sufficient width",
-            "prob": 0.77279687,
-            "icon": "https://voxpop-icons.s3.eu-west-1.amazonaws.com/default.png"
-        },
-        {
-            "label": "No crosswalk",
-            "prob": 0.56207496,
-            "icon": "https://voxpop-icons.s3.eu-west-1.amazonaws.com/default.png"
-        }
+      {
+        "label": "Irregular sidewalk",
+        "prob": 0.81273973,
+        "icon": "https://voxpop-icons.s3.eu-west-1.amazonaws.com/irregular_sidewalk.png"
+      },
+      {
+        "label": "Crosswalk with sufficient width",
+        "prob": 0.77279687,
+        "icon": "https://voxpop-icons.s3.eu-west-1.amazonaws.com/default.png"
+      },
+      {
+        "label": "No crosswalk",
+        "prob": 0.56207496,
+        "icon": "https://voxpop-icons.s3.eu-west-1.amazonaws.com/default.png"
+      }
     ]
-}`
+  }
+}
+```
 
 ### Upvote/Downvote Marker Information
 
-**Endpoint:** PUT /point-feedback?lat=${lat}&longt=${long}&is_like=${like}
+**Endpoint:** PUT `/point-feedback?lat=${lat}&longt=${long}&is_like=${like}`
+
 **Description:** This API call allows users to upvote or downvote the accuracy of the information associated with a specific marker. The `lat` and `longt` parameters in the endpoint represent the latitude and longitude coordinates of the marker. The `is_like` parameter is set to true for an upvote and false for a downvote
-**Response:** `{
-    "MESSAGE": "Your feedback has been registered!",
-    "DATA": [
-        {
-            "likes": 1,
-            "dislikes": 0
-        }
-    ]
-}`
+**Response:**
+
+```
+{
+  "MESSAGE": "Your feedback has been registered!",
+  "DATA": [
+    {
+      "likes": 1,
+      "dislikes": 0
+    }
+  ]
+}
+```
 
 ### Get Directions
 
-**Endpoint:** GET /get-route?origin=${originValue}&destination=${destinationValue}&wheelchair_type=${selectedType}
+**Endpoint:** `GET /get-route?origin=${originValue}&destination=${destinationValue}&wheelchair_type=${selectedType}`
+
 **Description:** This API call retrieves directions from a specified origin to a destination. The `origin` and `destination` parameters represent the starting and ending locations respectively. The wheelchair_type parameter indicates the type of wheelchair being used, allowing the app to consider specific accessibility requirements. The API calculates and returns multiple route options based on accessibility factors, along with associated scores indicating the level of wheelchair accessibility for each route.
-**Response:** `{
-    "STATUS": "SUCCESS",
-    "MESSAGE": "Returned point metadata",
-    "MESSAGE_CODE": 0,
-    "DATA": [
+
+**Response:**
+
+```
+{
+  "STATUS": "SUCCESS",
+  "MESSAGE": "Returned point metadata",
+  "MESSAGE_CODE": 0,
+  "DATA": [
+    {
+      "best_route": {
+        "name": "Rua Augusta and Rua Salgueiro Maia",
+        "center": [
+            38.748224155458296,
+            -9.131696371714233
+        ],
+        "estimated_time": 119.63000000000001,
+        "distance": 9969.3,
+        "segments": [
+          {
+            "score": 0.9,
+            "color": "#72c472",
+            "origin": [
+                -9.137112,
+                38.709223
+            ],
+            "destination": [
+                -9.137533,
+                38.710279
+            ],
+            "instruction": "Head north on Rua Augusta",
+            "distance": 123
+          },
+          {
+            "score": 0.9,
+            "color": "#72c472",
+            "origin": [
+                -9.12971,
+                38.783987
+            ],
+            "destination": [
+                -9.12971,
+                38.783987
+            ],
+            "instruction": "Arrive at Rua Salgueiro Maia, on the left",
+            "distance": 0
+          }
+        ],
+        "average_accessibility": 0.9,
+        "color": "#72c472",
+        "neighbourhood_points": []
+      },
+      "other_routes": [
         {
-            "best_route": {
-                "name": "Rua Augusta and Rua Salgueiro Maia",
-                "center": [
-                    38.748224155458296,
-                    -9.131696371714233
-                ],
-                "estimated_time": 119.63000000000001,
-                "distance": 9969.3,
-                "segments": [
-                    {
-                        "score": 0.9,
-                        "color": "#72c472",
-                        "origin": [
-                            -9.137112,
-                            38.709223
-                        ],
-                        "destination": [
-                            -9.137533,
-                            38.710279
-                        ],
-                        "instruction": "Head north on Rua Augusta",
-                        "distance": 123
-                    },
-                    {
-                        "score": 0.9,
-                        "color": "#72c472",
-                        "origin": [
-                            -9.12971,
-                            38.783987
-                        ],
-                        "destination": [
-                            -9.12971,
-                            38.783987
-                        ],
-                        "instruction": "Arrive at Rua Salgueiro Maia, on the left",
-                        "distance": 0
-                    }
-                ],
-                "average_accessibility": 0.9,
-                "color": "#72c472",
-                "neighbourhood_points": []
+          "name": "Rua de São Julião and Rua Salgueiro Maia",
+          "center": [
+            38.74714396030597,
+            -9.13073950898695
+          ],
+          "estimated_time": 122.31,
+          "distance": 10192.6,
+          "segments": [
+            {
+              "score": 0.5,
+              "color": "#ffc700",
+              "origin": [
+                -9.137112,
+                38.709223
+              ],
+              "destination": [
+                -9.134505,
+                38.709855
+              ],
+              "instruction": "Head east on Rua de São Julião",
+              "distance": 236.9
             },
-            "other_routes": [
-                {
-                    "name": "Rua de São Julião and Rua Salgueiro Maia",
-                    "center": [
-                        38.74714396030597,
-                        -9.13073950898695
-                    ],
-                    "estimated_time": 122.31,
-                    "distance": 10192.6,
-                    "segments": [
-                        {
-                            "score": 0.5,
-                            "color": "#ffc700",
-                            "origin": [
-                                -9.137112,
-                                38.709223
-                            ],
-                            "destination": [
-                                -9.134505,
-                                38.709855
-                            ],
-                            "instruction": "Head east on Rua de São Julião",
-                            "distance": 236.9
-                        },
-                        {
-                            "score": 0.5,
-                            "color": "#ffc700",
-                            "origin": [
-                                -9.12971,
-                                38.783987
-                            ],
-                            "destination": [
-                                -9.12971,
-                                38.783987
-                            ],
-                            "instruction": "Arrive at Rua Salgueiro Maia, on the left",
-                            "distance": 0
-                        }
-                    ],
-                    "average_accessibility": 0.5,
-                    "color": "#ffc700",
-                    "neighbourhood_points": []
-                }
-            ]
+            {
+              "score": 0.5,
+              "color": "#ffc700",
+              "origin": [
+                -9.12971,
+                38.783987
+              ],
+              "destination": [
+                -9.12971,
+                38.783987
+              ],
+              "instruction": "Arrive at Rua Salgueiro Maia, on the left",
+              "distance": 0
+          }
+          ],
+          "average_accessibility": 0.5,
+          "color": "#ffc700",
+          "neighbourhood_points": []
         }
-    ]
-}`
+      ]
+    }
+  ]
+}
+```
 
 ## Contact
 
