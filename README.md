@@ -187,7 +187,29 @@ By providing comprehensive point information, allowing users to review and valid
                 38.710279
             ],
             "instruction": "Head north on Rua Augusta",
-            "distance": 123
+            "distance": 123,
+            "subsegments": [
+              {
+                  "origin": [
+                      -9.101019,
+                      38.761548
+                  ],
+                  "destination": [
+                      -9.100978,
+                      38.76176
+                  ]
+              },
+              {
+                  "origin": [
+                      -9.100978,
+                      38.76176
+                  ],
+                  "destination": [
+                      -9.100972,
+                      38.761792
+                  ]
+              }
+            ]
           },
           {
             "score": 0.9,
@@ -201,7 +223,8 @@ By providing comprehensive point information, allowing users to review and valid
                 38.783987
             ],
             "instruction": "Arrive at Rua Salgueiro Maia, on the left",
-            "distance": 0
+            "distance": 0,
+            "subsegments": []
           }
         ],
         "average_accessibility": 0.9,
@@ -230,7 +253,8 @@ By providing comprehensive point information, allowing users to review and valid
                 38.709855
               ],
               "instruction": "Head east on Rua de São Julião",
-              "distance": 236.9
+              "distance": 236.9,
+              "subsegments": []
             },
             {
               "score": 0.5,
@@ -244,7 +268,8 @@ By providing comprehensive point information, allowing users to review and valid
                 38.783987
               ],
               "instruction": "Arrive at Rua Salgueiro Maia, on the left",
-              "distance": 0
+              "distance": 0,
+              "subsegments": []
           }
           ],
           "average_accessibility": 0.5,
