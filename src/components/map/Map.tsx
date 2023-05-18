@@ -111,7 +111,7 @@ function Map({
                                           subPoint.destination[0],
                                       ],
                                   ]}
-                                  color={'#353cdd'}
+                                  color={point.color}
                                   weight={8}
                                   smoothFactor={1}
                               />
@@ -134,7 +134,7 @@ function Map({
                                       ]}
                                       color={
                                           i === directionRoutes.length - 1
-                                              ? '#353cdd'
+                                              ? point.color
                                               : '#8E8EA6'
                                       }
                                       weight={8}
