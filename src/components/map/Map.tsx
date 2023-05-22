@@ -100,41 +100,51 @@ function Map({
                 )}
 
                 {selectedRoute
-                    ? selectedRoute.segments.map((point, i) => (
-                          <Polyline
-                              key={i}
-                              positions={[
-                                  [point.origin[1], point.origin[0]],
-                                  [point.destination[1], point.destination[0]],
-                              ]}
-                              color={'#353cdd'}
-                              weight={8}
-                              smoothFactor={1}
-                          />
-                      ))
-                    : directionRoutes.map((route, i) => {
-                          return route.segments.map((point, j) => (
+                    ? selectedRoute.segments.map((point) =>
+                          point.subsegments.map((subPoint, k) => (
                               <Polyline
-                                  key={j}
+                                  key={k}
                                   positions={[
-                                      [point.origin[1], point.origin[0]],
+                                      [subPoint.origin[1], subPoint.origin[0]],
                                       [
-                                          point.destination[1],
-                                          point.destination[0],
+                                          subPoint.destination[1],
+                                          subPoint.destination[0],
                                       ],
                                   ]}
-                                  color={
-                                      i === directionRoutes.length - 1
-                                          ? '#353cdd'
-                                          : '#8E8EA6'
-                                  }
+                                  color={point.color}
                                   weight={8}
                                   smoothFactor={1}
-                                  eventHandlers={{
-                                      click: () => routeClick(route),
-                                  }}
                               />
                           ))
+                      )
+                    : directionRoutes.map((route, i) => {
+                          return route.segments.map((point) =>
+                              point.subsegments.map((subPoint, k) => (
+                                  <Polyline
+                                      key={k}
+                                      positions={[
+                                          [
+                                              subPoint.origin[1],
+                                              subPoint.origin[0],
+                                          ],
+                                          [
+                                              subPoint.destination[1],
+                                              subPoint.destination[0],
+                                          ],
+                                      ]}
+                                      color={
+                                          i === directionRoutes.length - 1
+                                              ? point.color
+                                              : '#8E8EA6'
+                                      }
+                                      weight={8}
+                                      smoothFactor={1}
+                                      eventHandlers={{
+                                          click: () => routeClick(route),
+                                      }}
+                                  />
+                              ))
+                          )
                       })}
             </MapContainer>
         </div>
