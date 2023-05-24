@@ -54,6 +54,7 @@ const MarkerDetail = ({
                             label: f.label,
                             prob: f.prob,
                             icon: f.icon,
+                            color: f.color,
                         })),
                         address: marker.address,
                     })
@@ -99,6 +100,7 @@ const MarkerDetail = ({
                                 label: f.label,
                                 prob: f.prob,
                                 icon: f.icon,
+                                color: f.color,
                             })
                         ),
                         address: selectedMarkerDetail?.address,
@@ -175,6 +177,7 @@ const MarkerDetail = ({
                                 label={f.label}
                                 prob={f.prob}
                                 icon={f.icon}
+                                color={f.color}
                             />
                         ))}
                     </div>
