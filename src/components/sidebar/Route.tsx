@@ -18,7 +18,7 @@ function Route({
             </div>
             <div className="ml-auto flex flex-col whitespace-nowrap text-right">
                 <div className="text-sm font-semibold text-nilg-black">
-                    {Math.round(route.estimated_time)} min
+                    {route.estimated_time} min
                 </div>
                 <div className="text-xs font-semibold text-nilg-dark-gray">
                     {route.distance} m
