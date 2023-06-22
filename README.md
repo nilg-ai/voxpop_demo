@@ -282,7 +282,8 @@ By providing comprehensive point information, allowing users to review and valid
 }
 ```
 
-## Learn More
+## Licenses
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-To learn React, check out the [React documentation](https://reactjs.org/).
+This code is released under CC BY-ND 4.0
+
+This project is co-financed by the European Regional Development Fund through the Urban Innovative Actions Initiative
