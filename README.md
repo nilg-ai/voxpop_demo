@@ -287,3 +287,5 @@ By providing comprehensive point information, allowing users to review and valid
 This code is released under CC BY-ND 4.0
 
 This project is co-financed by the European Regional Development Fund through the Urban Innovative Actions Initiative
+
+<img src="https://github.com/nilg-ai/voxpop-nilgai/blob/dev/figures/all_logos.png" data-canonical-src="https://github.com/nilg-ai/voxpop-nilgai/blob/dev/figures/all_logos.png" width="900" height="250" />
